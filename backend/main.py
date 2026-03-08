@@ -2,28 +2,36 @@ import logging
 import sys
 
 from fastapi import FastAPI, Request
+from fastapi.concurrency import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 import uvicorn
 
+from database import connect_db, disconnect_db
 from config import settings
 from exceptions import AppException
 from routes import scraper
 
 
 def create_app() -> FastAPI:
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        await connect_db()
+        yield
+        await disconnect_db()
+
     app = FastAPI(
-        title="CometNavigator API",
-        version="1.0.0",
-        root_path="/api"
+        title="CometNavigator API", version="1.0.0", root_path="/api", lifespan=lifespan
     )
 
     logger = logging.getLogger("cometnavigator")
     logger.setLevel(logging.DEBUG if settings.DEBUG else logging.INFO)
 
     handler = logging.StreamHandler(sys.stdout)
-    handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    handler.setFormatter(
+        logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    )
     logger.addHandler(handler)
 
     # Middleware
@@ -37,7 +45,9 @@ def create_app() -> FastAPI:
 
     # Exception handling
     @app.exception_handler(RequestValidationError)
-    async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    async def validation_exception_handler(
+        request: Request, exc: RequestValidationError
+    ):
         errors = []
         for error in exc.errors():
             field = error["loc"][-1] if error["loc"] else "unknown"
@@ -55,10 +65,7 @@ def create_app() -> FastAPI:
 
         return JSONResponse(
             status_code=422,
-            content={
-                "error": "Validation failed",
-                "details": errors
-            },
+            content={"error": "Validation failed", "details": errors},
         )
 
     @app.exception_handler(AppException)
