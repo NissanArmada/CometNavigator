@@ -1,0 +1,51 @@
+[
+  {
+    "_id": "ObjectId('64f8c3d4e5f6000000000001')",
+    "index": 1,
+    "room_number": "JSOM 1.118",
+    "start_time": "08:00",
+    "end_time": "10:00"
+  },
+  {
+    "_id": "ObjectId('64f8c3d4e5f6000000000002')",
+    "index": 2,
+    "room_number": "JSOM 2.803",
+    "start_time": "11:30",
+    "end_time": "14:00"
+  },
+  {
+    "_id": "ObjectId('64f8c3d4e5f6000000000003')",
+    "index": 3,
+    "room_number": "ECSS 2.203",
+    "start_time": "13:00",
+    "end_time": "16:30"
+  },
+  {
+    "_id": "ObjectId('64f8c3d4e5f6000000000004')",
+    "index": 4,
+    "room_number": "SOM 1.110",
+    "start_time": "09:00",
+    "end_time": "11:00"
+  },
+  {
+    "_id": "ObjectId('64f8c3d4e5f6000000000005')",
+    "index": 5,
+    "room_number": "GR 3.302",
+    "start_time": "14:30",
+    "end_time": "17:00"
+  },
+  {
+    "_id": "ObjectId('64f8c3d4e5f6000000000006')",
+    "index": 6,
+    "room_number": "ECSS 3.910",
+    "start_time": "16:00",
+    "end_time": "19:00"
+  },
+  {
+    "_id": "ObjectId('64f8c3d4e5f6000000000007')",
+    "index": 7,
+    "room_number": "McDermott Library 2.4",
+    "start_time": "10:00",
+    "end_time": "13:00"
+  }
+]

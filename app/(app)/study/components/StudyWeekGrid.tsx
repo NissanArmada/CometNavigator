@@ -126,7 +126,7 @@ export default function StudyWeekGrid() {
                   <div key={d.num} className="flex-1 border-r border-white/5 last:border-r-0 relative p-1">
                     {event && (
                       <div
-                        className={`border-l-2 rounded-lg p-2 text-[10px] leading-tight cursor-pointer transition-opacity hover:opacity-90 ${typeColors[event.type]}`}
+                        className={`relative border-l-2 rounded-lg p-2 text-[10px] leading-tight cursor-pointer transition-opacity hover:opacity-90 ${typeColors[event.type]}`}
                         style={{ minHeight: `${event.span * ROW_H - 8}px` }}
                         onMouseMove={(e) => handleMouseMove(e, event)}
                         onMouseLeave={handleMouseLeave}
@@ -139,6 +139,9 @@ export default function StudyWeekGrid() {
                             {event.badge}
                           </span>
                         )}
+                        <span className="absolute bottom-1.5 right-1.5 bg-black/30 text-white/60 text-[9px] font-bold px-1.5 py-0.5 rounded-full">
+                          {event.participants}
+                        </span>
                       </div>
                     )}
                   </div>
