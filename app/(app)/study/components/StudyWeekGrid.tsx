@@ -51,55 +51,79 @@ const events: Event[] = [
   { day: 6, startRow: 6, span: 1, label: "Observation", sublabel: "", type: "other" },
 ];
 
+const GUTTER = 80;
+const ROW_H = 72;
+
 export default function StudyWeekGrid() {
   return (
-    <div className="bg-[rgba(26,24,23,0.6)] border border-white/5 rounded-2xl overflow-hidden">
+    <div className="flex flex-col h-full">
       {/* Day headers */}
-      <div className="grid grid-cols-[72px_repeat(7,1fr)] border-b border-white/5">
-        <div className="p-3" />
+      <div className="bg-black/20 border-b border-white/10 flex w-full shrink-0">
+        <div className="shrink-0" style={{ width: GUTTER }} />
         {days.map((d) => (
-          <div key={d.num} className="py-3 flex flex-col items-center gap-1 border-l border-white/5">
-            <span className="text-[#9ca3af] text-xs font-medium tracking-wider">{d.short}</span>
-            <div className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold ${
-              d.today ? "bg-[#af5a3c] text-white" : "text-white"
-            }`}>
+          <div
+            key={d.num}
+            className="flex-1 border-r border-white/5 last:border-r-0 py-2 flex flex-col items-center gap-0.5"
+          >
+            <span className="text-[#6b7280] text-[10px] font-extrabold tracking-[1px] uppercase">
+              {d.short}
+            </span>
+            <span
+              className={`w-7 h-7 flex items-center justify-center rounded-full text-sm font-bold ${
+                d.today ? "bg-white text-[#1a1817]" : "text-[#d1d5db]"
+              }`}
+            >
               {d.num}
-            </div>
+            </span>
           </div>
         ))}
       </div>
 
-      {/* Time rows */}
-      {hours.map((hour, hIdx) => (
-        <div key={hour} className="grid grid-cols-[72px_repeat(7,1fr)] border-b border-white/5 min-h-[72px]">
-          <div className="px-3 pt-2">
-            <span className="text-[#9ca3af] text-xs whitespace-nowrap">{hour}</span>
+      {/* Scrollable time rows */}
+      <div className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full">
+        {hours.map((hour, hIdx) => (
+          <div
+            key={hour}
+            className="flex w-full border-b border-white/5"
+            style={{ minHeight: ROW_H }}
+          >
+            {/* Time label */}
+            <div
+              className="shrink-0 flex items-end justify-end pb-[5px] px-2 border-r border-white/5"
+              style={{ width: GUTTER }}
+            >
+              <span className="text-[#6b7280] text-[10px] font-bold uppercase whitespace-nowrap">
+                {hour}
+              </span>
+            </div>
+
+            {/* Day cells */}
+            {days.map((d, dIdx) => {
+              const event = events.find(e => e.day === dIdx && e.startRow === hIdx);
+              const covered = events.some(e => e.day === dIdx && e.startRow < hIdx && e.startRow + e.span > hIdx);
+              return (
+                <div key={d.num} className="flex-1 border-r border-white/5 last:border-r-0 relative p-1">
+                  {event && (
+                    <div
+                      className={`border-l-2 rounded-lg p-2 text-[10px] leading-tight ${typeColors[event.type]}`}
+                      style={{ minHeight: `${event.span * ROW_H - 8}px` }}
+                    >
+                      <p className="font-bold uppercase tracking-wide text-[9px] opacity-80">{event.type}</p>
+                      <p className="font-semibold text-white text-[11px] mt-0.5">{event.label}</p>
+                      {event.sublabel && <p className="opacity-60 text-[10px]">{event.sublabel}</p>}
+                      {event.badge && (
+                        <span className="inline-block mt-1 bg-white/20 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
+                          {event.badge}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-          {days.map((d, dIdx) => {
-            const event = events.find(e => e.day === dIdx && e.startRow === hIdx);
-            const covered = events.some(e => e.day === dIdx && e.startRow < hIdx && e.startRow + e.span > hIdx);
-            return (
-              <div key={d.num} className="border-l border-white/5 relative p-1">
-                {event && (
-                  <div
-                    className={`border-l-2 rounded-lg p-2 text-[10px] leading-tight ${typeColors[event.type]}`}
-                    style={{ minHeight: `${event.span * 72 - 8}px` }}
-                  >
-                    <p className="font-bold uppercase tracking-wide text-[9px] opacity-80">{event.type}</p>
-                    <p className="font-semibold text-white text-[11px] mt-0.5">{event.label}</p>
-                    {event.sublabel && <p className="opacity-60 text-[10px]">{event.sublabel}</p>}
-                    {event.badge && (
-                      <span className="inline-block mt-1 bg-white/20 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
-                        {event.badge}
-                      </span>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
