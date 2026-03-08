@@ -1,5 +1,5 @@
-const imgIcon = "http://localhost:3845/assets/33e0e85cff69b06f81d1736bb0ced4d75aecf363.svg";
-const imgDotsIcon = "http://localhost:3845/assets/fc949e1f6e0876f7416d204b3cc0a2347819417e.svg";
+const imgIcon = "/assets/33e0e85cff69b06f81d1736bb0ced4d75aecf363.svg";
+const imgDotsIcon = "/assets/fc949e1f6e0876f7416d204b3cc0a2347819417e.svg";
 
 const credentials = [
   { title: "Ph.D. Aerospace Engineering", subtitle: "MIT - Class of 2038" },

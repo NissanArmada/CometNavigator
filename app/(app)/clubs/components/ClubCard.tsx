@@ -1,5 +1,5 @@
-const imgTimeIcon = "http://localhost:3845/assets/b743c3ddfed387f93b0ff6eac03698574c298b7e.svg";
-const imgWhyIcon = "http://localhost:3845/assets/ee732cf4fa2314812fc26c9caa8cb3b8151bf697.svg";
+const imgTimeIcon = "/assets/b743c3ddfed387f93b0ff6eac03698574c298b7e.svg";
+const imgWhyIcon = "/assets/ee732cf4fa2314812fc26c9caa8cb3b8151bf697.svg";
 
 type TimeSlot = { label: string; events: { name: string; time: string; color: "orange" | "gold" }[] };
 

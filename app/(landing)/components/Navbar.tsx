@@ -1,5 +1,5 @@
 const imgLogo =
-  "http://localhost:3845/assets/941b64066fe68786ba4f0c782c9cd092f2088c8a.svg";
+  "/assets/941b64066fe68786ba4f0c782c9cd092f2088c8a.svg";
 
 import Link from "next/link";
 

@@ -1,11 +1,11 @@
 const imgDashboard =
-  "http://localhost:3845/assets/841125e70c061fae0fdc2d2258308e33425d30de.png";
+  "/assets/841125e70c061fae0fdc2d2258308e33425d30de.png";
 const imgAlertIcon =
-  "http://localhost:3845/assets/5b337c9b7b488406ae4ded91e423eaa8ec6f0c60.svg";
+  "/assets/5b337c9b7b488406ae4ded91e423eaa8ec6f0c60.svg";
 const imgRecommendIcon =
-  "http://localhost:3845/assets/3eaf54b5498eec0c0abc7f7d1d8fd5b0fe5e9584.svg";
+  "/assets/3eaf54b5498eec0c0abc7f7d1d8fd5b0fe5e9584.svg";
 const imgCheckIcon =
-  "http://localhost:3845/assets/86f88ae756e20185f99cf74aeda9c1452e60a444.svg";
+  "/assets/86f88ae756e20185f99cf74aeda9c1452e60a444.svg";
 
 export default function ProductPreviewSection() {
   return (

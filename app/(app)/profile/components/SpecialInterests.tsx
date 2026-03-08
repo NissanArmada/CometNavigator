@@ -1,4 +1,4 @@
-const imgIcon = "http://localhost:3845/assets/1dc889d6ecfedbc3b4f6a66905ea10179becafb9.svg";
+const imgIcon = "/assets/1dc889d6ecfedbc3b4f6a66905ea10179becafb9.svg";
 
 const interests = [
   "Terraforming Theory",

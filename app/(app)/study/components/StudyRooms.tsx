@@ -1,5 +1,5 @@
-const imgDoorIcon = "http://localhost:3845/assets/75ada541a12a12fb1684f99baed1dcba24ab3b2d.svg";
-const imgPinIcon = "http://localhost:3845/assets/c086632fe8077f0856f919952367e5cbf179f4ca.svg";
+const imgDoorIcon = "/assets/75ada541a12a12fb1684f99baed1dcba24ab3b2d.svg";
+const imgPinIcon = "/assets/c086632fe8077f0856f919952367e5cbf179f4ca.svg";
 
 const rooms = [
   { number: "402", name: "Level 4 East Wing", location: "Main Research Hub", time: "3h 45m" },

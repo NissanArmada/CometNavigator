@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-const imgLogo = "http://localhost:3845/assets/66fbdce0468157c30a2bf4eea33f97c3f7199d0b.svg";
-const imgUserIcon = "http://localhost:3845/assets/49f093c9fabb4443ade4861b5c5cb2e057e5e291.svg";
-const imgLockIcon = "http://localhost:3845/assets/b16637946c9f7951ab4749fe525ac290dc78ee02.svg";
-const imgArrowIcon = "http://localhost:3845/assets/9076dd6e4c1895d69009143f7dd6c131e31d8c88.svg";
+const imgLogo = "/assets/66fbdce0468157c30a2bf4eea33f97c3f7199d0b.svg";
+const imgUserIcon = "/assets/49f093c9fabb4443ade4861b5c5cb2e057e5e291.svg";
+const imgLockIcon = "/assets/b16637946c9f7951ab4749fe525ac290dc78ee02.svg";
+const imgArrowIcon = "/assets/9076dd6e4c1895d69009143f7dd6c131e31d8c88.svg";
 
 export default function LoginCard() {
   return (

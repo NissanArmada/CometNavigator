@@ -1,9 +1,9 @@
 const imgLogo =
-  "http://localhost:3845/assets/72c0c286a8f65b6f17cbbe12f0879746225bba10.svg";
+  "/assets/72c0c286a8f65b6f17cbbe12f0879746225bba10.svg";
 const imgTwitterIcon =
-  "http://localhost:3845/assets/7e249c1c7f93b11dbe626e2cb4790ae7e09a584b.svg";
+  "/assets/7e249c1c7f93b11dbe626e2cb4790ae7e09a584b.svg";
 const imgGithubIcon =
-  "http://localhost:3845/assets/43815bb9898b12dfb10588f15ce1512780ce3f34.svg";
+  "/assets/43815bb9898b12dfb10588f15ce1512780ce3f34.svg";
 
 const navColumns = [
   {

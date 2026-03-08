@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-const imgLogo = "http://localhost:3845/assets/66fbdce0468157c30a2bf4eea33f97c3f7199d0b.svg";
-const imgEmailIcon = "http://localhost:3845/assets/c833ac234546f881ebe1dec796ca5fdc14f2ac27.svg";
-const imgLockIcon = "http://localhost:3845/assets/1be06f62cc082e6148146c521a9482184c0cb193.svg";
-const imgShieldIcon = "http://localhost:3845/assets/723592846210f7dcaba3af3170c8d13657b7b89a.svg";
-const imgUserIcon = "http://localhost:3845/assets/d1a1ca28ae57339f85c103a54a8b571b3cbf4695.svg";
+const imgLogo = "/assets/66fbdce0468157c30a2bf4eea33f97c3f7199d0b.svg";
+const imgEmailIcon = "/assets/c833ac234546f881ebe1dec796ca5fdc14f2ac27.svg";
+const imgLockIcon = "/assets/1be06f62cc082e6148146c521a9482184c0cb193.svg";
+const imgShieldIcon = "/assets/723592846210f7dcaba3af3170c8d13657b7b89a.svg";
+const imgUserIcon = "/assets/d1a1ca28ae57339f85c103a54a8b571b3cbf4695.svg";
 
 export default function SignUpCard() {
   return (

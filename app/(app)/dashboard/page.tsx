@@ -9,9 +9,9 @@ export default function DashboardPage() {
   const [tab, setTab] = useState<"calendar" | "schedule">("calendar");
 
   return (
-    <div className="p-8 max-w-[1280px] mx-auto">
+    <div className="h-[calc(100vh-64px)] flex flex-col px-6 py-4 w-full">
       {/* Page header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="shrink-0 flex items-center justify-between mb-3">
         <h1 className="font-black text-white text-[clamp(28px,3vw,40px)] tracking-tight">Mission Schedule</h1>
         <div className="flex items-center gap-2 bg-[rgba(26,24,23,0.6)] border border-white/10 rounded-xl p-1">
           <button
@@ -38,12 +38,14 @@ export default function DashboardPage() {
       </div>
 
       {tab === "calendar" ? (
-        <>
+        <div className="flex-1 min-h-0 backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
           <CalendarHeader />
           <CalendarGrid />
-        </>
+        </div>
       ) : (
-        <ClassScheduleManager />
+        <div className="flex-1 min-h-0">
+          <ClassScheduleManager />
+        </div>
       )}
     </div>
   );

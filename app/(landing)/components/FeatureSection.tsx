@@ -1,9 +1,9 @@
 const imgCalendarIcon =
-  "http://localhost:3845/assets/f0db38849c3685f20db31544ab76dbed94152242.svg";
+  "/assets/f0db38849c3685f20db31544ab76dbed94152242.svg";
 const imgStudyIcon =
-  "http://localhost:3845/assets/7a634ff9dd009610807854b51feaf4ef0db7b1e6.svg";
+  "/assets/7a634ff9dd009610807854b51feaf4ef0db7b1e6.svg";
 const imgClubIcon =
-  "http://localhost:3845/assets/55fc7966c7b7a5a23fc5b2542266cdac00df6fe3.svg";
+  "/assets/55fc7966c7b7a5a23fc5b2542266cdac00df6fe3.svg";
 
 const features = [
   {
