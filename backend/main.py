@@ -1,6 +1,8 @@
 import logging
 import sys
 
+import firebase_admin
+from firebase_admin import credentials
 from fastapi import FastAPI, Request
 from fastapi.concurrency import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,9 +13,9 @@ import uvicorn
 from database import connect_db, disconnect_db
 from config import settings
 from exceptions import AppException
-from routes import scraper
 from auth.router import router as auth_router
 from onboarding.router import router as onboarding_router
+from routes import scraper, auth
 
 
 def create_app() -> FastAPI:
@@ -76,11 +78,21 @@ def create_app() -> FastAPI:
             status_code=exc.status_code,
             content={"detail": exc.detail},
         )
+        
+    if not firebase_admin._apps:
+        try:
+            cred = credentials.Certificate(settings.FIREBASE_CREDENTIALS)
+            firebase_admin.initialize_app(cred)
+            logger.info("Firebase Admin SDK initialized successfully")
+        except Exception as e:
+            logger.critical(f"Failed to initialize Firebase Admin SDK: {str(e)}")
+            raise
+
 
     # Routes
     app.include_router(scraper.router, prefix="/scraper", tags=["scraper"])
-    app.include_router(auth_router, prefix="/auth", tags=["auth"])
     app.include_router(onboarding_router, prefix="/onboarding", tags=["onboarding"])
+    app.include_router(auth.router, prefix="/auth", tags=["auth"])
 
     @app.get("")
     async def root_no_slash():

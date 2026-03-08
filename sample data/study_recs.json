@@ -1,0 +1,78 @@
+[
+  {
+    "_id": "ObjectId('64f8e6a700000000000001')",
+    "user_id": "firebase_uid_001",
+    "recommendations": [
+      {
+        "index": 1,
+        "event_id": "ObjectId('64f8d4e5f60000000000001')",
+        "date": "2026-03-02",
+        "start_time": "15:30",
+        "end_time": "17:00",
+        "reason": "You have a free block after your last class. Good time to review Graphs and Trees before the weekend."
+      },
+      {
+        "index": 2,
+        "event_id": "ObjectId('64f8d4e5f60000000000002')",
+        "date": "2026-03-03",
+        "start_time": "14:00",
+        "end_time": "15:30",
+        "reason": "Your afternoon is open after your study group ends. Eigenvalues review aligns with your MATH 2418 coursework."
+      },
+      {
+        "index": 3,
+        "event_id": "ObjectId('64f8d4e5f60000000000002')",
+        "date": "2026-03-03",
+        "start_time": "16:00",
+        "end_time": "17:30",
+        "reason": "CS 4349 Dynamic Programming session fits your free window before the AIS meetup at 18:00."
+      },
+      {
+        "index": 4,
+        "event_id": "ObjectId('64f8d4e5f60000000000004')",
+        "date": "2026-03-05",
+        "start_time": "14:30",
+        "end_time": "16:00",
+        "reason": "Post-lunch free block. You missed the morning session — this is the next available slot to catch up on CS 3345 sorting algorithms."
+      },
+      {
+        "index": 5,
+        "event_id": "ObjectId('64f8d4e5f60000000000005')",
+        "date": "2026-03-06",
+        "start_time": "15:30",
+        "end_time": "17:00",
+        "reason": "Friday afternoon opens up after MATH class. Greedy Algorithms review is a good wind-down for the week."
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8e6a700000000000002')",
+    "user_id": "firebase_uid_123456",
+    "recommendations": [
+      {
+        "index": 1,
+        "event_id": "ObjectId('64f8d4e5f60000000000003')",
+        "date": "2026-03-04",
+        "start_time": "10:00",
+        "end_time": "11:30",
+        "reason": "Based on your interest in Machine Learning, the Fourier Transform session maps well to signal processing fundamentals."
+      },
+      {
+        "index": 2,
+        "event_id": "ObjectId('64f8d4e5f60000000000004')",
+        "date": "2026-03-05",
+        "start_time": "17:00",
+        "end_time": "18:00",
+        "reason": "You have a free block in the early evening and usually study at this time. PHYS 2325 Lab Report is a short focused session."
+      },
+      {
+        "index": 3,
+        "event_id": "ObjectId('64f8d4e5f60000000000005')",
+        "date": "2026-03-06",
+        "start_time": "13:00",
+        "end_time": "14:00",
+        "reason": "Short gap between your exam and next class. Greedy Algorithms is light enough for a 1-hour review slot."
+      }
+    ]
+  }
+]
