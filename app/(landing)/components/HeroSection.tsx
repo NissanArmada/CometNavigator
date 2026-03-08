@@ -1,9 +1,9 @@
 const imgHero =
-  "http://localhost:3845/assets/78afdcfbed23cb40b4acd0433e67899202b1899d.png";
+  "/assets/78afdcfbed23cb40b4acd0433e67899202b1899d.png";
 const imgBetaIcon =
-  "http://localhost:3845/assets/0f51571d007e6a8c178d15bff6d3aa3c83c41a76.svg";
+  "/assets/0f51571d007e6a8c178d15bff6d3aa3c83c41a76.svg";
 const imgPlayIcon =
-  "http://localhost:3845/assets/ae4ee7abb94f90028737ccac2f75ba84e01c1291.svg";
+  "/assets/ae4ee7abb94f90028737ccac2f75ba84e01c1291.svg";
 
 export default function HeroSection() {
   return (

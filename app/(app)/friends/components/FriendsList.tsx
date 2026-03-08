@@ -1,7 +1,7 @@
-const imgLewis = "http://localhost:3845/assets/3dcd1ea116f19d6185eefce8fc60b42a3496bae4.png";
-const imgMailIcon = "http://localhost:3845/assets/bf9404ab0034cbba1e86a9ad2008e7e2c3b73a1f.svg";
-const imgCheckIcon = "http://localhost:3845/assets/53683aa1e8beaa9e633f85252451b3849050af3c.svg";
-const imgCalIcon = "http://localhost:3845/assets/f41f47b886a1a383e2e2c2807bc8f7035d942d58.svg";
+const imgLewis = "/assets/3dcd1ea116f19d6185eefce8fc60b42a3496bae4.png";
+const imgMailIcon = "/assets/bf9404ab0034cbba1e86a9ad2008e7e2c3b73a1f.svg";
+const imgCheckIcon = "/assets/53683aa1e8beaa9e633f85252451b3849050af3c.svg";
+const imgCalIcon = "/assets/f41f47b886a1a383e2e2c2807bc8f7035d942d58.svg";
 
 const contacts = [
   { name: "Commander Melissa Lewis", role: "Mission Lead", initials: null, avatar: imgLewis, online: true, active: true },

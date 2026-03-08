@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const imgLogo = "http://localhost:3845/assets/941b64066fe68786ba4f0c782c9cd092f2088c8a.svg";
-const imgDashboardIcon = "http://localhost:3845/assets/586591ce1466139459bb3d3f942d103a6e8711f8.svg";
-const imgStudyIcon = "http://localhost:3845/assets/93dcf443a9ca5f0618368ccc6288209946a2a041.svg";
-const imgClubIcon = "http://localhost:3845/assets/71af83a173b60092cba30a379778cc088ff3cc44.svg";
-const imgFriendsIcon = "http://localhost:3845/assets/8d2e4ad879039110c3b6348c714f5db39eed3219.svg";
-const imgUserAvatar = "http://localhost:3845/assets/3f68eef93fc7f9fdb42e8dabfba14fcc2b1b960c.png";
+const imgLogo = "/assets/941b64066fe68786ba4f0c782c9cd092f2088c8a.svg";
+const imgDashboardIcon = "/assets/586591ce1466139459bb3d3f942d103a6e8711f8.svg";
+const imgStudyIcon = "/assets/93dcf443a9ca5f0618368ccc6288209946a2a041.svg";
+const imgClubIcon = "/assets/71af83a173b60092cba30a379778cc088ff3cc44.svg";
+const imgFriendsIcon = "/assets/8d2e4ad879039110c3b6348c714f5db39eed3219.svg";
+const imgUserAvatar = "/assets/3f68eef93fc7f9fdb42e8dabfba14fcc2b1b960c.png";
 
 const navItems = [
   { href: "/dashboard", label: "DASHBOARD", icon: imgDashboardIcon, iconSize: "w-[30px] h-[18px]" },

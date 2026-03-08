@@ -1,6 +1,6 @@
 import AppNavbar from "./components/AppNavbar";
 
-const imgBg = "http://localhost:3845/assets/e81843a9f0e2b7df5802f930d077cd7023c7d6aa.png";
+const imgBg = "/assets/e81843a9f0e2b7df5802f930d077cd7023c7d6aa.png";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
