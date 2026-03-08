@@ -12,6 +12,7 @@ from database import connect_db, disconnect_db
 from config import settings
 from exceptions import AppException
 from routes import scraper
+from auth.router import router as auth_router
 
 
 def create_app() -> FastAPI:
@@ -77,6 +78,7 @@ def create_app() -> FastAPI:
 
     # Routes
     app.include_router(scraper.router, prefix="/scraper", tags=["scraper"])
+    app.include_router(auth_router, prefix="/auth", tags=["auth"])
 
     @app.get("")
     async def root_no_slash():

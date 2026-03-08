@@ -4,8 +4,8 @@ from typing import List
 
 
 class Settings:
-    DATABASE_URL: str = config("DATABASE_URL")
-    DATABASE_NAME: str = config("DATABASE_NAME")
+    DATABASE_URL: str = config("DATABASE_URL", default="mongodb://localhost:27017")
+    DATABASE_NAME: str = config("DATABASE_NAME", default="cometnavigator")
 
     # FIREBASE_CREDENTIALS = json.loads(
     #     config("FIREBASE_CREDENTIALS", default="{}")
