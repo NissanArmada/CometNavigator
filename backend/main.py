@@ -5,10 +5,11 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
+import uvicorn
 
 from config import settings
 from exceptions import AppException
-from routes import auth
+from routes import scraper
 
 
 def create_app() -> FastAPI:
@@ -68,7 +69,7 @@ def create_app() -> FastAPI:
         )
 
     # Routes
-    app.include_router(auth.router, prefix="/auth", tags=["auth"])
+    app.include_router(scraper.router, prefix="/scraper", tags=["scraper"])
 
     @app.get("")
     async def root_no_slash():
@@ -77,7 +78,7 @@ def create_app() -> FastAPI:
     # Health / root
     @app.get("/")
     async def root():
-        return {"message": "MeteorMate backend is online!"}
+        return {"message": "CometNavigator backend is online!"}
 
     @app.get("/health")
     async def health_check():
@@ -87,3 +88,11 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "main:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=settings.DEBUG,
+    )
