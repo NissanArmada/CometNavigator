@@ -1,3 +1,5 @@
+"use client";
+
 import { auth } from "@/utils/firebase";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -20,7 +22,7 @@ export default function SurveyPage() {
   async function handleSubmit() {
     const user = auth.currentUser!;
 
-    const res = await fetch("127.0.0.1:8000/onboarding/update-survey", {
+    const res = await fetch("http://127.0.0.1:8000/onboarding/update-survey", {
       method: "POST",
         headers: {
           "Content-Type": "application/json",

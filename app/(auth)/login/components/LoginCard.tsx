@@ -1,9 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import React, { useState } from "react";
 import { auth } from "@/utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { navigate } from "next/dist/client/components/segment-cache/navigation";
-import router from "next/router";
+import navigation from "next/navigation";
 
 const imgLogo = "/assets/66fbdce0468157c30a2bf4eea33f97c3f7199d0b.svg";
 const imgUserIcon = "/assets/49f093c9fabb4443ade4861b5c5cb2e057e5e291.svg";
@@ -15,7 +16,7 @@ export default function LoginCard() {
   const [password, setPassword] = useState<string>();
 
   async function handle_submit() {
-    const res = await fetch("127.0.0.1:8000/scraper/courses", {
+    const res = await fetch("http://127.0.0.1:8000/scraper/courses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +31,7 @@ export default function LoginCard() {
       const course_data = await res.json();
       sessionStorage.setItem("course_data", JSON.stringify(course_data));
 
-      const res1 = await fetch("127.0.0.1:8000/auth/register", {
+      const res1 = await fetch("http://127.0.0.1:8000/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,10 +44,10 @@ export default function LoginCard() {
 
       if (res1.status === 409) {
         await signInWithEmailAndPassword(auth, `${netid}@utdallas.edu`, password!);
-        router.push("/dashboard");
+        navigation.redirect("/dashboard");
       } else {
         await signInWithEmailAndPassword(auth, `${netid}@utdallas.edu`, password!);
-        router.push("/onboard-survey");
+        navigation.redirect("/onboard-survey");
       }
     }
   }
@@ -107,12 +108,10 @@ export default function LoginCard() {
 
           {/* Submit */}
           <div className="pt-2">
-            <Link href="/onboard-survey">
-              <button className="w-full bg-[#af5a3c] text-white font-bold text-base py-4 rounded-2xl flex items-center justify-center gap-2 shadow-[0_10px_15px_-3px_rgba(175,90,60,0.2),0_4px_6px_-4px_rgba(175,90,60,0.2)] hover:bg-[#9a4f35] transition-colors cursor-pointer">
-                Begin Mission
-                <img src={imgArrowIcon} alt="" className="w-[15px] h-[15px] block" />
-              </button>
-            </Link>
+            <button onClick={handle_submit} className="w-full bg-[#af5a3c] text-white font-bold text-base py-4 rounded-2xl flex items-center justify-center gap-2 shadow-[0_10px_15px_-3px_rgba(175,90,60,0.2),0_4px_6px_-4px_rgba(175,90,60,0.2)] hover:bg-[#9a4f35] transition-colors cursor-pointer">
+              Begin Mission
+              <img src={imgArrowIcon} alt="" className="w-[15px] h-[15px] block" />
+            </button>
           </div>
         </div>
       </div>
