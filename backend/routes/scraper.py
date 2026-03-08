@@ -27,7 +27,7 @@ def get_week_bounds() -> tuple[datetime, datetime]:
 
 def login(netid: str, password: str) -> tuple[Playwright, Browser, Page]:
     p = sync_playwright().start()
-    browser = p.chromium.launch(headless=False)
+    browser = p.chromium.launch()
     page = browser.new_page()
     page.goto("https://elearning.utdallas.edu/ultra/institution-page")
 
