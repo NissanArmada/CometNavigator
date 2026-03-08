@@ -34,7 +34,7 @@ const features = [
 
 export default function FeatureSection() {
   return (
-    <section className="bg-white/[0.05] px-6 py-24">
+    <section id="features" className="bg-white/[0.05] px-6 py-24">
       <div className="max-w-[1280px] mx-auto flex flex-col gap-16">
         {/* Header */}
         <div className="flex flex-col gap-4 items-center text-center">
