@@ -2,6 +2,7 @@
 
 import { useCalendar } from "../../CalendarContext";
 import { studyRecs } from "../data";
+import calendarsDataRaw from "../../../../sample data/calendars.json";
 
 const ROW_H  = 56;
 const GUTTER = 80;
@@ -46,28 +47,52 @@ const typeStyle: Record<EventType, { bg: string; border: string; timeColor: stri
   exam:     { bg: "bg-[rgba(239,68,68,0.3)]",   border: "border-[#ef4444]",  timeColor: "text-[#fca5a5]"  },
 };
 
-const events: { col: number; title: string; subtitle: string; start: string; end: string; type: EventType }[] = [
-  // MON 2026-03-02
-  { col: 0, title: "PHYS 2325",             subtitle: "ECSS 2.410",            start: "09:00", end: "09:50", type: "class"    },
-  { col: 0, title: "CS 3345",               subtitle: "ECSS 4.619",            start: "10:00", end: "11:15", type: "class"    },
-  { col: 0, title: "MATH 2418",             subtitle: "SOM 2.901",             start: "14:00", end: "15:15", type: "class"    },
-  // TUE 2026-03-03
-  { col: 1, title: "CS 3345",               subtitle: "ECSS 4.619",            start: "10:00", end: "11:15", type: "class"    },
-  { col: 1, title: "CS 3345 Midterm Prep",  subtitle: "JSOM 1.118",            start: "12:00", end: "13:30", type: "study"    },
-  { col: 1, title: "AIS Weekly Meetup",     subtitle: "ECSS 2.203",            start: "18:00", end: "19:30", type: "club"     },
-  // WED 2026-03-04
-  { col: 2, title: "PHYS 2325",             subtitle: "ECSS 2.410",            start: "09:00", end: "09:50", type: "class"    },
-  { col: 2, title: "MATH 2418",             subtitle: "SOM 2.901",             start: "14:00", end: "15:15", type: "class"    },
-  { col: 2, title: "Gym",                   subtitle: "",                      start: "16:00", end: "17:00", type: "personal" },
-  // THU 2026-03-05
-  { col: 3, title: "CS 3345",               subtitle: "ECSS 4.619",            start: "10:00", end: "11:15", type: "class"    },
-  { col: 3, title: "PHYS 2325 Homework",    subtitle: "McDermott Library",     start: "13:00", end: "14:00", type: "study"    },
-  { col: 3, title: "Robotics Build Night",  subtitle: "ECSS 1.202",            start: "19:00", end: "20:30", type: "club"     },
-  // FRI 2026-03-06
-  { col: 4, title: "PHYS 2325",             subtitle: "ECSS 2.410",            start: "09:00", end: "09:50", type: "class"    },
-  { col: 4, title: "CS 3345 Midterm Exam",  subtitle: "ECSS 2.415",            start: "11:00", end: "12:30", type: "exam"     },
-  { col: 4, title: "MATH 2418",             subtitle: "SOM 2.901",             start: "14:00", end: "15:15", type: "class"    },
-];
+// Utility to map dynamic API strings -> CalendarGrid styled types
+function mapEventType(typeStr: string): EventType {
+  const t = typeStr.toLowerCase();
+  if (t.includes("class")) return "class";
+  if (t.includes("study")) return "study";
+  if (t.includes("club")) return "club";
+  if (t.includes("exam")) return "exam";
+  return "personal";
+}
+
+// Convert "2026-03-02" to Col 0 (Mon), "2026-03-03" to Col 1 (Tue), etc. 
+// Assuming Week starts on Monday March 02 2026 as per your hardcoded labels
+function mapDateToCol(dayStr: string): number {
+  const date = new Date(dayStr);
+  // getDay() gives 0 for Sunday, 1 for Monday... We want Mon=0, Sun=6
+  const day = date.getDay(); 
+  return day === 0 ? 6 : day - 1;
+}
+
+const events = calendarsDataRaw.flatMap((dayData) => {
+  const col = mapDateToCol(dayData.day);
+  return dayData.events.map((ev) => {
+     // Split "Title — Subtitle" if it exists in the 'other' field
+     let title = ev.event_type;
+     let subtitle = ev.other;
+
+     // E.g. "PHYS 2325 — ECSS 2.410"
+     if (ev.other && ev.other.includes("—")) {
+       const parts = ev.other.split("—").map(p => p.trim());
+       title = parts[0];
+       subtitle = parts[1];
+     } else if (ev.event_type === "Class" && ev.other) {
+       title = ev.other;
+       subtitle = "";
+     }
+
+     return {
+       col,
+       title,
+       subtitle,
+       start: ev.start,
+       end: ev.end,
+       type: mapEventType(ev.event_type)
+     };
+  });
+});
 
 type Props = {
   /** "calendar" (default) — calendar events normal, study recs semi-transparent overlay

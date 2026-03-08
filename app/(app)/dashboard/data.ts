@@ -1,5 +1,6 @@
 // Derived from sample data/study_recs.json (firebase_uid_001)
 // and sample data/calendars.json (firebase_uid_001)
+import studyRecsRaw from "../../../sample data/study_recs.json";
 
 export type StudyRec = {
   index:  number;
@@ -21,40 +22,34 @@ export type CalEvent = {
 };
 
 // Dates: 2026-03-02=Mon(0), 03=Tue(1), 04=Wed(2), 05=Thu(3), 06=Fri(4)
-export const studyRecs: StudyRec[] = [
-  {
-    index: 1, col: 0, start: "15:30", end: "17:00",
-    label: "CS 3345 – Graphs & Trees",
-    course: "CS 3345 – Data Structures & Algorithms",
-    reason: "You have a free block after your last class. Good time to review Graphs and Trees before the weekend.",
-  },
-  {
-    index: 2, col: 1, start: "14:00", end: "15:30",
-    label: "MATH 2418 – Eigenvalues",
-    course: "MATH 2418 – Linear Algebra",
-    reason: "Your afternoon is open after your study group ends. Eigenvalues review aligns with your MATH 2418 coursework.",
-  },
-  {
-    index: 3, col: 1, start: "16:00", end: "17:30",
-    label: "CS 4349 – Dynamic Programming",
-    course: "CS 4349 – Algorithm Analysis",
-    reason: "CS 4349 Dynamic Programming session fits your free window before the AIS meetup at 18:00.",
-  },
-  {
-    index: 4, col: 3, start: "14:30", end: "16:00",
-    label: "CS 3345 – Sorting Algorithms",
-    course: "CS 3345 – Data Structures & Algorithms",
-    reason: "Post-lunch free block. You missed the morning session — this is the next available slot to catch up on CS 3345 sorting algorithms.",
-  },
-  {
-    index: 5, col: 4, start: "15:30", end: "17:00",
-    label: "CS 4349 – Greedy Algorithms",
-    course: "CS 4349 – Algorithm Analysis",
-    reason: "Friday afternoon opens up after MATH class. Greedy Algorithms review is a good wind-down for the week.",
-  },
-];
+function mapDateToCol(dayStr: string): number {
+  const date = new Date(dayStr);
+  const day = date.getDay(); 
+  return day === 0 ? 6 : day - 1;
+}
+
+const labelsByIndex: Record<number, { label: string; course: string }> = {
+  1: { label: "CS 3345 – Graphs & Trees", course: "CS 3345 – Data Structures & Algorithms" },
+  2: { label: "MATH 2418 – Eigenvalues", course: "MATH 2418 – Linear Algebra" },
+  3: { label: "CS 4349 – Dynamic Programming", course: "CS 4349 – Algorithm Analysis" },
+  4: { label: "CS 3345 – Sorting Algorithms", course: "CS 3345 – Data Structures & Algorithms" },
+  5: { label: "CS 4349 – Greedy Algorithms", course: "CS 4349 – Algorithm Analysis" },
+};
+
+const userZeroRecs = studyRecsRaw[0].recommendations;
+
+export const studyRecs: StudyRec[] = userZeroRecs.map((r) => ({
+  index: r.index,
+  col: mapDateToCol(r.date),
+  start: r.start_time,
+  end: r.end_time,
+  label: labelsByIndex[r.index]?.label || "Study Session",
+  course: labelsByIndex[r.index]?.course || "Study Course",
+  reason: r.reason,
+}));
 
 // From calendars.json (firebase_uid_001) — mirrors the hardcoded events in CalendarGrid
+// We preserve this export in case other components were reliant on it.
 export const calendarEvents: CalEvent[] = [
   // MON
   { col: 0, title: "PHYS 2325",            subtitle: "ECSS 2.410",        start: "09:00", end: "09:50", type: "class"    },
