@@ -6,6 +6,25 @@ const imgGradCapIcon  = "/assets/29260df46ef9baa6c39f06b1689cfc3b0f1afe8a.svg";
 const imgClockIcon    = "/assets/201c1dc27d5ca0ad3abc26eaf66cb0b6e322e033.svg";
 const imgChevronIcon  = "/assets/ae77ef9f532ecb945bc2bd5470d5cb196f69499a.svg";
 
+// Courses from courses.json (firebase_uid_001)
+const primaryCourse = {
+  name: "CS 3345 – Data Structures & Algorithms",
+  instructor: "Dr. Karen Ho",
+  duration: "75 min",
+  reason: "Free block identified after your last class. Aligns with your upcoming midterm and active CS 3345 study sessions this week.",
+};
+
+const altCourses = [
+  { label: "A", name: "PHYS 2325 – University Physics I",   time: "09:00 – 09:50", color: "blue"  },
+  { label: "B", name: "MATH 2418 – Linear Algebra",         time: "14:00 – 15:15", color: "green" },
+];
+
+// Study recommendations from study_recs.json (firebase_uid_001, index 1)
+const studyRec = {
+  time: "15:30 – 17:00",
+  reason: "Good time to review Graphs and Trees before the weekend.",
+};
+
 export default function ClassScheduleManager() {
   return (
     <div className="flex gap-6 w-full h-full">
@@ -32,26 +51,32 @@ export default function ClassScheduleManager() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[#d98c5f] text-[10px] font-extrabold tracking-[1px] uppercase">Primary Choice</span>
-                <p className="text-white font-bold text-sm leading-5">Adv. Martian Logistics & Habitation</p>
+                <p className="text-white font-bold text-sm leading-5">{primaryCourse.name}</p>
               </div>
             </div>
 
             <div className="flex gap-4">
               <div className="flex flex-col gap-0.5 flex-1">
                 <span className="text-[#9ca3af] text-[9px] font-extrabold tracking-[0.9px] uppercase">Instructor</span>
-                <span className="text-white text-xs font-bold">Dr. Aris Thorne</span>
+                <span className="text-white text-xs font-bold">{primaryCourse.instructor}</span>
               </div>
               <div className="flex flex-col gap-0.5 flex-1">
                 <span className="text-[#9ca3af] text-[9px] font-extrabold tracking-[0.9px] uppercase">Duration</span>
-                <span className="text-white text-xs font-bold">60 Minutes</span>
+                <span className="text-white text-xs font-bold">{primaryCourse.duration}</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[#9ca3af] text-[9px] font-extrabold tracking-[0.9px] uppercase">Study Slot</span>
+              <div className="flex items-center gap-1">
+                <img src={imgClockIcon} alt="" className="w-[9px] h-[10px] block opacity-60 shrink-0" />
+                <span className="text-white text-xs font-bold">{studyRec.time}</span>
               </div>
             </div>
 
             <div className="flex flex-col gap-1">
-              <span className="text-[#9ca3af] text-[9px] font-extrabold tracking-[0.9px] uppercase">Description</span>
-              <p className="text-[#9ca3af] text-[11px] leading-[1.5]">
-                Based on your current mission trajectory. Focuses on emergency resource allocation and sustainable habitat cycling protocols in Sector 7.
-              </p>
+              <span className="text-[#9ca3af] text-[9px] font-extrabold tracking-[0.9px] uppercase">Why</span>
+              <p className="text-[#9ca3af] text-[11px] leading-[1.5]">{primaryCourse.reason}</p>
             </div>
 
             <button className="bg-[#b05b3d] w-full py-2.5 rounded-lg text-white text-[10px] font-extrabold tracking-[1px] uppercase cursor-pointer hover:bg-[#9a4f35] transition-colors">
@@ -59,35 +84,31 @@ export default function ClassScheduleManager() {
             </button>
           </div>
 
-          {/* Option A */}
-          <div className="bg-white/5 border border-white/5 rounded-xl flex items-center gap-3 p-4 cursor-pointer hover:border-white/10 transition-colors">
-            <div className="bg-[rgba(59,130,246,0.2)] border border-[rgba(59,130,246,0.3)] rounded-lg w-10 h-10 flex items-center justify-center shrink-0">
-              <span className="text-white text-base font-extrabold">A</span>
-            </div>
-            <div className="flex-1 flex flex-col gap-1 min-w-0">
-              <p className="text-white font-bold text-sm leading-5 truncate">Oxygen Scrubbing Systems</p>
-              <div className="flex items-center gap-1">
-                <img src={imgClockIcon} alt="" className="w-[9px] h-[10px] block opacity-60 shrink-0" />
-                <span className="text-[#9ca3af] text-[11px]">16:30 - 17:30</span>
+          {/* Alt course options */}
+          {altCourses.map((course) => (
+            <div
+              key={course.label}
+              className="bg-white/5 border border-white/5 rounded-xl flex items-center gap-3 p-4 cursor-pointer hover:border-white/10 transition-colors"
+            >
+              <div
+                className={`rounded-lg w-10 h-10 flex items-center justify-center shrink-0 ${
+                  course.color === "blue"
+                    ? "bg-[rgba(59,130,246,0.2)] border border-[rgba(59,130,246,0.3)]"
+                    : "bg-[rgba(34,197,94,0.2)] border border-[rgba(34,197,94,0.3)]"
+                }`}
+              >
+                <span className="text-white text-base font-extrabold">{course.label}</span>
               </div>
-            </div>
-            <img src={imgChevronIcon} alt="" className="w-[7px] h-[4px] block opacity-50 shrink-0" />
-          </div>
-
-          {/* Option B */}
-          <div className="bg-white/5 border border-white/5 rounded-xl flex items-center gap-3 p-4 cursor-pointer hover:border-white/10 transition-colors">
-            <div className="bg-[rgba(34,197,94,0.2)] border border-[rgba(34,197,94,0.3)] rounded-lg w-10 h-10 flex items-center justify-center shrink-0">
-              <span className="text-white text-base font-extrabold">B</span>
-            </div>
-            <div className="flex-1 flex flex-col gap-1 min-w-0">
-              <p className="text-white font-bold text-sm leading-5 truncate">Flora Hydration Protocols</p>
-              <div className="flex items-center gap-1">
-                <img src={imgClockIcon} alt="" className="w-[9px] h-[10px] block opacity-60 shrink-0" />
-                <span className="text-[#9ca3af] text-[11px]">16:45 - 17:45</span>
+              <div className="flex-1 flex flex-col gap-1 min-w-0">
+                <p className="text-white font-bold text-sm leading-5 truncate">{course.name}</p>
+                <div className="flex items-center gap-1">
+                  <img src={imgClockIcon} alt="" className="w-[9px] h-[10px] block opacity-60 shrink-0" />
+                  <span className="text-[#9ca3af] text-[11px]">{course.time}</span>
+                </div>
               </div>
+              <img src={imgChevronIcon} alt="" className="w-[7px] h-[4px] block opacity-50 shrink-0" />
             </div>
-            <img src={imgChevronIcon} alt="" className="w-[7px] h-[4px] block opacity-50 shrink-0" />
-          </div>
+          ))}
         </div>
 
         {/* Refresh button */}
