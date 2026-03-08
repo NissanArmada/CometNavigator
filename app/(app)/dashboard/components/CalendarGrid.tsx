@@ -1,3 +1,7 @@
+"use client";
+
+import { useCalendar } from "../../CalendarContext";
+
 const ROW_H = 56;
 const GUTTER = 80;
 
@@ -66,6 +70,7 @@ const events: { col: number; title: string; subtitle: string; start: string; end
 
 export default function CalendarGrid() {
   const totalH = hours.length * ROW_H;
+  const { addedSessions } = useCalendar();
 
   return (
     <div className="w-full flex flex-col h-full">
@@ -122,6 +127,30 @@ export default function CalendarGrid() {
 
             {/* Events layer */}
             <div className="absolute inset-0 pointer-events-none">
+              {addedSessions.map((s, i) => {
+                const startY = time24ToY(s.start);
+                const endY   = time24ToY(s.end);
+                const evH    = Math.max(endY - startY, 30);
+                const colW   = 100 / 7;
+                return (
+                  <div
+                    key={`added-${i}`}
+                    className="absolute p-[4px]"
+                    style={{ top: startY, left: `${s.day * colW}%`, right: `${(6 - s.day) * colW}%` }}
+                  >
+                    <div
+                      className="bg-[rgba(34,197,94,0.3)] border-l-4 border-[#4ade80] rounded-br-[4px] rounded-tr-[4px] pl-3 pr-2 py-2 flex flex-col overflow-hidden"
+                      style={{ height: evH }}
+                    >
+                      <p className="text-white text-[10px] font-bold leading-[15px] truncate">{s.label}</p>
+                      {s.sublabel && <p className="text-white/50 text-[9px] leading-none truncate">{s.sublabel}</p>}
+                      <p className="text-[#bbf7d0] text-[9px] leading-[13.5px] mt-auto">
+                        {formatTime(s.start)} – {formatTime(s.end)}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
               {events.map((ev, i) => {
                 const startY = time24ToY(ev.start);
                 const endY   = time24ToY(ev.end);
