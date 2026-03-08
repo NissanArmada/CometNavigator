@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import AppNavbar from "./components/AppNavbar";
 import { CalendarProvider } from "./CalendarContext";
-=======
-//This is supposed to delete the Nav bar from the survey page.
 import NavbarWrapper from "./components/NavbarWrapper";
->>>>>>> 8fbc3ea94c3c619fd950d44862bfdb9363191b7a
 
 const imgBg = "/assets/e81843a9f0e2b7df5802f930d077cd7023c7d6aa.png";
 
