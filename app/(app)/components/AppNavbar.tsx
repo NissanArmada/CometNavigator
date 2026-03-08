@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, use } from "react";
 import { motion, useMotionValue, useTransform, useSpring, type MotionValue } from "motion/react";
+import { auth } from "@/utils/firebase";
+import { User } from "firebase/auth";
 
 const imgLogo = "/assets/941b64066fe68786ba4f0c782c9cd092f2088c8a.svg";
 const imgDashboardIcon = "/assets/586591ce1466139459bb3d3f942d103a6e8711f8.svg";
@@ -131,6 +133,15 @@ export default function AppNavbar() {
     const angle = ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
     return [distance * Math.cos(angle), distance * Math.sin(angle)];
   };
+
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((u) => {
+      setUser(u ?? undefined);
+    });
+    return () => unsubscribe();
+  });
   
   const createParticle = (i: number, t: number, d: [number, number], r: number) => {
     let rotate = noise(r / 10);
@@ -425,7 +436,6 @@ export default function AppNavbar() {
           {/* Desktop user */}
           <div className="hidden md:flex border-l border-white/10 pl-8 items-center gap-3 shrink-0">
             <Link href="/profile" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <span className="font-bold text-sm text-white">Cmdr. Watney</span>
               <div className="border-2 border-[#b05b3d] rounded-full w-10 h-10 overflow-hidden shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)] shrink-0">
                 <img src={imgUserAvatar} alt="User" className="w-full h-full object-cover" />
               </div>

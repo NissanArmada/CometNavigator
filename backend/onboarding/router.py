@@ -1,6 +1,7 @@
 import logging
 from fastapi import APIRouter, Depends
 from pymongo.asynchronous.database import AsyncDatabase
+import requests
 
 from database import get_db
 from onboarding.schemas import (
@@ -14,6 +15,7 @@ from onboarding.ml_service import (
     compute_embedding,
     get_top_club_matches,
 )
+from config import settings
 
 router = APIRouter()
 logger = logging.getLogger("cometnavigator.onboarding")
@@ -122,12 +124,22 @@ async def get_club_recommendations(
             club = next(
                 (c for c in clubs if str(c.get("_id", c.get("id"))) == club_id), None
             )
+            
+            res = requests.get(f"{settings.NEBULA_API_URL}/club/{club['id']}", headers={
+                'x-api-key': settings.NEBULA_API_KEY
+            })
+            if not res.ok:
+                logger.error(f"Failed to fetch club details for club_id: {club_id}")
+                continue
+            
+            data = res.json()
+            
             if club:
                 recommendations.append(
                     ClubRecommendation(
                         id=club_id,
                         name=club.get("name", ""),
-                        description=club.get("description", ""),
+                        description=data['data']['description'],
                         tags=club.get("tags", []),
                         similarity_score=round(similarity_score, 3),
                     )

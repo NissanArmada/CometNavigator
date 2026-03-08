@@ -111,6 +111,6 @@ def get_top_club_matches(
         similarities.append((club_id, similarity))
     
     # Sort by similarity score (descending) and take top 3
-    top_matches = sorted(similarities, key=lambda x: x[1], reverse=True)[:3]
+    top_matches = sorted(similarities, key=lambda x: x[1], reverse=True)[:10]
     
     return top_matches
