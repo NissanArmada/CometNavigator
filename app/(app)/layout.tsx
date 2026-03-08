@@ -1,3 +1,4 @@
+// NavbarWrapper conditionally hides the nav bar on the survey page.
 import { CalendarProvider } from "./CalendarContext";
 import NavbarWrapper from "./components/NavbarWrapper";
 
