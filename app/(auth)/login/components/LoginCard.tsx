@@ -60,21 +60,13 @@ export default function LoginCard() {
 
           {/* Submit */}
           <div className="pt-2">
-            <Link href="/dashboard">
+            <Link href="/onboard-survey">
               <button className="w-full bg-[#af5a3c] text-white font-bold text-base py-4 rounded-2xl flex items-center justify-center gap-2 shadow-[0_10px_15px_-3px_rgba(175,90,60,0.2),0_4px_6px_-4px_rgba(175,90,60,0.2)] hover:bg-[#9a4f35] transition-colors cursor-pointer">
                 Begin Mission
                 <img src={imgArrowIcon} alt="" className="w-[15px] h-[15px] block" />
               </button>
             </Link>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="border-t border-[rgba(51,65,85,0.5)] pt-6 flex items-center justify-center gap-1">
-          <span className="text-[#94a3b8] text-sm">New explorer?</span>
-          <Link href="/signup" className="text-[#d98c5f] text-sm font-bold underline decoration-[rgba(217,140,95,0.3)] hover:text-[#af5a3c] transition-colors">
-            Create New Account
-          </Link>
         </div>
       </div>
     </div>

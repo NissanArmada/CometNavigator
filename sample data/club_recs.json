@@ -1,0 +1,107 @@
+[
+  {
+    "_id": "ObjectId('64f8e5f600000000000001')",
+    "index": 1,
+    "name": "Artificial Intelligence Society (AIS)",
+    "rec_percentage": 94,
+    "reason": "Matches your interest in Machine Learning and Python from your CS coursework.",
+    "calendar": [
+      {
+        "day": "Tuesday",
+        "name": "Intro to Neural Networks Workshop",
+        "start_time": "19:00",
+        "end_time": "20:30"
+      },
+      {
+        "day": "Thursday",
+        "name": "Project Group Meetup",
+        "start_time": "18:00",
+        "end_time": "19:00"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8e5f600000000000002')",
+    "index": 2,
+    "name": "Association for Computing Machinery (ACM)",
+    "rec_percentage": 88,
+    "reason": "Top CS club on campus. Aligns with your CS 3345 and CS 4349 courses.",
+    "calendar": [
+      {
+        "day": "Wednesday",
+        "name": "Weekly General Meeting",
+        "start_time": "18:00",
+        "end_time": "19:00"
+      },
+      {
+        "day": "Friday",
+        "name": "Competitive Programming Practice",
+        "start_time": "19:00",
+        "end_time": "21:00"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8e5f600000000000003')",
+    "index": 3,
+    "name": "Robotics Club",
+    "rec_percentage": 81,
+    "reason": "Strong overlap with embedded systems and algorithms. Great for CS/EE students.",
+    "calendar": [
+      {
+        "day": "Monday",
+        "name": "Build Night",
+        "start_time": "19:00",
+        "end_time": "21:00"
+      },
+      {
+        "day": "Wednesday",
+        "name": "Competition Strategy Meeting",
+        "start_time": "17:00",
+        "end_time": "18:00"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8e5f600000000000004')",
+    "index": 4,
+    "name": "Society of Physics Students (SPS)",
+    "rec_percentage": 75,
+    "reason": "You are enrolled in PHYS 2325. Peer support and research opportunities available.",
+    "calendar": [
+      {
+        "day": "Tuesday",
+        "name": "Physics Colloquium Watch Party",
+        "start_time": "16:00",
+        "end_time": "17:30"
+      },
+      {
+        "day": "Thursday",
+        "name": "Research Interest Panel",
+        "start_time": "18:30",
+        "end_time": "19:30"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8e5f600000000000005')",
+    "index": 5,
+    "name": "Comet Coding Collective (CCC)",
+    "rec_percentage": 70,
+    "reason": "Casual coding community for project collaboration and hackathon prep.",
+    "calendar": [
+      {
+        "day": "Friday",
+        "name": "Open Hack Night",
+        "start_time": "20:00",
+        "end_time": "23:00"
+      },
+      {
+        "day": "Saturday",
+        "name": "Project Demo Day",
+        "start_time": "15:00",
+        "end_time": "17:00"
+      }
+    ]
+  }
+]
