@@ -13,6 +13,8 @@ import uvicorn
 from database import connect_db, disconnect_db
 from config import settings
 from exceptions import AppException
+from auth.router import router as auth_router
+from onboarding.router import router as onboarding_router
 from routes import scraper, auth
 
 
@@ -89,6 +91,7 @@ def create_app() -> FastAPI:
 
     # Routes
     app.include_router(scraper.router, prefix="/scraper", tags=["scraper"])
+    app.include_router(onboarding_router, prefix="/onboarding", tags=["onboarding"])
     app.include_router(auth.router, prefix="/auth", tags=["auth"])
 
     @app.get("")
