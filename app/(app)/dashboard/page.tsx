@@ -38,7 +38,7 @@ export default function DashboardPage() {
       </div>
 
       {tab === "calendar" ? (
-        <div className="flex-1 min-h-0 backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+        <div className="flex-1 min-h-0 flex flex-col backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-2xl overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
           <CalendarHeader />
           <CalendarGrid />
         </div>

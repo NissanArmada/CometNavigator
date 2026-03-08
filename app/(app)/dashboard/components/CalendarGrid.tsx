@@ -12,12 +12,13 @@ const days = [
 ];
 
 const hours = [
-  "9:00 AM","10:00 AM","11:00 AM","12:00 PM",
-  "1:00 PM","2:00 PM","3:00 PM","4:00 PM",
-  "5:00 PM","6:00 PM","7:00 PM","8:00 PM",
+  "12:00 AM","1:00 AM","2:00 AM","3:00 AM","4:00 AM","5:00 AM",
+  "6:00 AM","7:00 AM","8:00 AM","9:00 AM","10:00 AM","11:00 AM",
+  "12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM",
+  "6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM","11:00 PM",
 ];
 
-/** Convert "H:MM AM/PM" to hours offset from 9 AM */
+/** Convert "H:MM AM/PM" to hours offset from 12 AM */
 function timeToY(time: string): number {
   const [hhmm, period] = time.split(" ");
   const [hStr, mStr] = hhmm.split(":");
@@ -25,7 +26,7 @@ function timeToY(time: string): number {
   const m = parseInt(mStr);
   if (period === "PM" && h !== 12) h += 12;
   if (period === "AM" && h === 12) h = 0;
-  return (h - 9 + m / 60) * ROW_H;
+  return (h + m / 60) * ROW_H;
 }
 
 const events = [
@@ -65,9 +66,9 @@ export default function CalendarGrid() {
   const totalH = hours.length * ROW_H;
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col h-full">
       {/* Day headers */}
-      <div className="bg-black/20 border-b border-white/10 flex w-full">
+      <div className="bg-black/20 border-b border-white/10 flex w-full shrink-0">
         <div className="shrink-0" style={{ width: GUTTER }} />
         {days.map((d) => (
           <div
@@ -88,7 +89,8 @@ export default function CalendarGrid() {
         ))}
       </div>
 
-      {/* Time grid */}
+      {/* Time grid — scrollable */}
+      <div className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full">
       <div
         className="relative flex w-full"
         style={{ height: totalH }}
@@ -161,6 +163,7 @@ export default function CalendarGrid() {
             })}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
