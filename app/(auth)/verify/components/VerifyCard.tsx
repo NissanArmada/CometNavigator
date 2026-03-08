@@ -65,7 +65,7 @@ export default function VerifyCard() {
         </div>
 
         {/* Text */}
-        <div className="flex flex-col items-center gap-4 px-16 pb-8">
+        <div className="flex flex-col items-center gap-4 px-6 sm:px-16 pb-8">
           <h2 className="font-semibold text-white text-[30px] tracking-[-0.75px] text-center">Verify Your Email</h2>
           <p className="text-[#94a3b8] text-base leading-[26px] text-center">
             Enter the 6-digit code we sent to your email address.
@@ -73,7 +73,7 @@ export default function VerifyCard() {
         </div>
 
         {/* Code inputs */}
-        <div className="flex justify-center gap-3 px-10 pb-8">
+        <div className="flex justify-center gap-2 sm:gap-3 px-4 sm:px-10 pb-8">
           {digits.map((d, i) => (
             <input
               key={i}
@@ -95,7 +95,7 @@ export default function VerifyCard() {
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col items-center gap-8 px-16 pb-14">
+        <div className="flex flex-col items-center gap-8 px-6 sm:px-16 pb-8 sm:pb-14">
           <Link href="/dashboard" className="w-full">
             <button
               disabled={!filled}

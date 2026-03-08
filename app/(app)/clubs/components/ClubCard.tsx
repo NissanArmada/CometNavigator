@@ -55,7 +55,7 @@ type ClubCardProps = {
 
 export default function ClubCard({ icon, iconBg, name, match, whyText, slots }: ClubCardProps) {
   return (
-    <div className="backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-3xl p-8 flex flex-col gap-6 flex-1 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+    <div className="backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-3xl p-4 sm:p-8 flex flex-col gap-6 flex-1 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
       {/* Club header */}
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
@@ -101,7 +101,7 @@ export default function ClubCard({ icon, iconBg, name, match, whyText, slots }: 
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 h-[215px]">
+        <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-4 min-[400px]:h-[215px]">
           {slots.map((slot) => {
             const { viewerStart, viewerRange, labelStart, labelEnd } = getSlotWindow(slot);
             const pct = (t: string) => toPercent(t, viewerStart, viewerRange);

@@ -1,4 +1,9 @@
-const ROW_H = 56;
+"use client";
+
+import { useCalendar } from "../../CalendarContext";
+import { studyRecs } from "../data";
+
+const ROW_H  = 56;
 const GUTTER = 80;
 
 const days = [
@@ -64,8 +69,54 @@ const events: { col: number; title: string; subtitle: string; start: string; end
   { col: 4, title: "MATH 2418",             subtitle: "SOM 2.901",             start: "14:00", end: "15:15", type: "class"    },
 ];
 
-export default function CalendarGrid() {
+type Props = {
+  /** "calendar" (default) — calendar events normal, study recs semi-transparent overlay
+   *  "schedule"            — calendar events dimmed, study recs shown prominently */
+  mode?: "calendar" | "schedule";
+  /** Called with the study rec's index when a rec event is clicked (schedule mode only) */
+  onRecClick?: (recIndex: number) => void;
+};
+
+export default function CalendarGrid({ mode = "calendar", onRecClick }: Props) {
   const totalH = hours.length * ROW_H;
+  const { addedSessions, isConfirmed } = useCalendar();
+
+  const colW = 100 / 7;
+
+  function eventBlock(
+    col: number, start: string, end: string,
+    bgCls: string, borderCls: string, timeColorCls: string,
+    title: string, subtitle: string | undefined,
+    opacity: number,
+    extraCls = "",
+  ) {
+    const startY = time24ToY(start);
+    const endY   = time24ToY(end);
+    const evH    = Math.max(endY - startY, 30);
+    return (
+      <div
+        key={`${col}-${start}`}
+        className="absolute p-[4px] pointer-events-none"
+        style={{
+          top:     startY,
+          left:    `${col * colW}%`,
+          right:   `${(6 - col) * colW}%`,
+          opacity,
+        }}
+      >
+        <div
+          className={`${bgCls} border-l-4 ${borderCls} rounded-br-[4px] rounded-tr-[4px] pl-3 pr-2 py-2 flex flex-col overflow-hidden ${extraCls}`}
+          style={{ height: evH }}
+        >
+          <p className="text-white text-[10px] font-bold leading-[15px] truncate">{title}</p>
+          {subtitle && <p className="text-white/50 text-[9px] leading-none truncate">{subtitle}</p>}
+          <p className={`${timeColorCls} text-[9px] leading-[13.5px] mt-auto`}>
+            {formatTime(start)} – {formatTime(end)}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full flex flex-col h-full">
@@ -111,7 +162,7 @@ export default function CalendarGrid() {
 
           {/* Grid body */}
           <div className="relative flex-1 flex">
-            {/* Vertical column separators */}
+            {/* Column separators */}
             {days.map((d) => (
               <div key={d.num} className="flex-1 border-r border-white/5 last:border-r-0 relative">
                 {hours.map((h) => (
@@ -120,40 +171,81 @@ export default function CalendarGrid() {
               </div>
             ))}
 
-            {/* Events layer */}
+            {/* ── Events layer ── */}
             <div className="absolute inset-0 pointer-events-none">
+
+              {/* 1. Calendar events from calendars.json
+                    - calendar mode: full opacity
+                    - schedule mode: dimmed (30% opacity) */}
               {events.map((ev, i) => {
-                const startY = time24ToY(ev.start);
-                const endY   = time24ToY(ev.end);
+                const s = typeStyle[ev.type];
+                const opacity = mode === "schedule" ? 0.3 : 1;
+                return (
+                  <div key={`cal-${i}`}>
+                    {eventBlock(ev.col, ev.start, ev.end, s.bg, s.border, s.timeColor, ev.title, ev.subtitle, opacity)}
+                  </div>
+                );
+              })}
+
+              {/* 2. Study recommendations from study_recs.json
+                    - calendar mode: semi-transparent dashed overlay (not yet confirmed)
+                    - schedule mode: full opacity, gold/orange recommendation style + clickable */}
+              {studyRecs.map((rec) => {
+                if (isConfirmed(rec.index)) return null;
+
+                const startY = time24ToY(rec.start);
+                const endY   = time24ToY(rec.end);
                 const evH    = Math.max(endY - startY, 30);
                 const colW   = 100 / 7;
-                const styles = typeStyle[ev.type];
+
+                const isSchedule = mode === "schedule";
+                const canClick   = isSchedule && !!onRecClick;
 
                 return (
                   <div
-                    key={i}
-                    className="absolute p-[4px] pointer-events-auto"
+                    key={`rec-${rec.index}`}
+                    className={`absolute p-[4px] ${canClick ? "pointer-events-auto cursor-pointer" : "pointer-events-none"}`}
                     style={{
-                      top:   startY,
-                      left:  `${ev.col * colW}%`,
-                      right: `${(6 - ev.col) * colW}%`,
+                      top:     startY,
+                      left:    `${rec.col * colW}%`,
+                      right:   `${(6 - rec.col) * colW}%`,
+                      opacity: isSchedule ? 1 : 0.55,
                     }}
+                    onClick={canClick ? () => onRecClick(rec.index) : undefined}
                   >
                     <div
-                      className={`${styles.bg} border-l-4 ${styles.border} rounded-br-[4px] rounded-tr-[4px] pl-3 pr-2 py-2 flex flex-col overflow-hidden`}
+                      className={`border-l-4 border-dashed border-[#d98c5f] rounded-br-[4px] rounded-tr-[4px] pl-3 pr-2 py-2 flex flex-col overflow-hidden transition-opacity ${
+                        isSchedule
+                          ? "bg-[rgba(217,140,95,0.35)] hover:bg-[rgba(217,140,95,0.5)]"
+                          : "bg-[rgba(217,140,95,0.12)]"
+                      }`}
                       style={{ height: evH }}
                     >
-                      <p className="text-white text-[10px] font-bold leading-[15px] truncate">{ev.title}</p>
-                      {ev.subtitle && (
-                        <p className="text-white/50 text-[9px] leading-none truncate">{ev.subtitle}</p>
-                      )}
-                      <p className={`${styles.timeColor} text-[9px] leading-[13.5px] mt-auto`}>
-                        {formatTime(ev.start)} – {formatTime(ev.end)}
+                      <p className="text-white text-[10px] font-bold leading-[15px] truncate">{rec.label}</p>
+                      <p className="text-white/50 text-[9px] leading-none truncate">Study Rec</p>
+                      <p className="text-[#d98c5f] text-[9px] leading-[13.5px] mt-auto">
+                        {formatTime(rec.start)} – {formatTime(rec.end)}
                       </p>
                     </div>
                   </div>
                 );
               })}
+
+              {/* 3. Confirmed recs & sessions added from StudyWeekGrid */}
+              {addedSessions.map((s, i) => (
+                <div key={`added-${i}`}>
+                  {eventBlock(
+                    s.day, s.start, s.end,
+                    "bg-[rgba(34,197,94,0.3)]",
+                    "border-[#4ade80]",
+                    "text-[#bbf7d0]",
+                    s.label,
+                    s.sublabel,
+                    1,
+                  )}
+                </div>
+              ))}
+
             </div>
           </div>
         </div>

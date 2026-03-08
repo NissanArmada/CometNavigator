@@ -136,9 +136,9 @@ const clubs = [
 
 export default function ClubsPage() {
   return (
-    <div className="p-8 max-w-[1280px] mx-auto flex flex-col gap-10">
+    <div className="p-4 sm:p-8 max-w-[1280px] mx-auto flex flex-col gap-10">
       {/* Header */}
-      <div className="flex items-end justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <h1 className="font-extrabold text-white text-[clamp(32px,4vw,48px)] tracking-[-1.2px]">
           Club Recommendations
         </h1>

@@ -61,7 +61,7 @@ export default function FriendsList({ activeTab, onTabChange }: Props) {
       </div>
 
       {/* Detail panel */}
-      <div className="flex-1 backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-2xl p-8 flex flex-col gap-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
+      <div className="flex-1 backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-2xl p-4 sm:p-8 flex flex-col gap-6 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-hidden">
         {/* Contact header */}
         <div className="flex items-start gap-4">
           <div className="relative">
@@ -71,7 +71,7 @@ export default function FriendsList({ activeTab, onTabChange }: Props) {
             <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-[#22c55e] border-2 border-[#2c2826]" />
           </div>
           <div className="flex-1">
-            <h2 className="font-extrabold text-white text-2xl leading-8">Commander Melissa Lewis</h2>
+            <h2 className="font-extrabold text-white text-xl sm:text-2xl leading-8">Commander Melissa Lewis</h2>
             <p className="font-bold text-[#d98c5f] text-xs tracking-[1.4px] uppercase mt-1">Ares III Mission Lead</p>
             <p className="text-[#9ca3af] text-sm leading-5 mt-2">
               A Navy veteran and geologist, Lewis leads the Ares III mission with a focus on sample collection and crew safety. Expert in martian topography and EVA protocols.
@@ -88,7 +88,7 @@ export default function FriendsList({ activeTab, onTabChange }: Props) {
         </div>
 
         {/* Stats row */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-4">
           <div className="bg-white/5 border border-white/5 rounded-2xl p-5">
             <p className="text-[#6b7280] text-[10px] font-extrabold tracking-[1px] uppercase mb-3">Status</p>
             <div className="flex items-center gap-2">
