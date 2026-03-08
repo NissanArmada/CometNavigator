@@ -1,6 +1,8 @@
 from pydantic import BaseModel, EmailStr, Field, field_validator
 import re
 
+from exceptions import BadRequest
+
 class UserCreate(BaseModel):
     email: EmailStr
     password: str = Field(..., min_length=6, description="Custom password for the user")
@@ -11,7 +13,7 @@ class UserCreate(BaseModel):
         # 3 letters, 6 numbers, @utdallas.edu
         pattern = r"^[a-zA-Z]{3}\d{6}@utdallas\.edu$"
         if not re.match(pattern, v):
-            raise ValueError("Email must be a valid @utdallas.edu address (e.g., abc123456@utdallas.edu)")
+            raise BadRequest("Email must be a valid @utdallas.edu address (e.g., abc123456@utdallas.edu)")
         return v
 
 class UserResponse(BaseModel):

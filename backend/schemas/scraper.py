@@ -16,3 +16,19 @@ class ScraperCredentials(BaseModel):
             raise BadRequest("invalid netid")
         
         return val
+
+class ScraperCourse(BaseModel):
+    subject: str
+    number: str
+    section: str
+    name: str
+    semester: str
+    instructor: str
+    meeting_days: list[str]
+    start_time: str
+    end_time: str
+    location: dict
+    syllabus_uri: str
+
+class ScraperResponse(BaseModel):
+    data: list[ScraperCourse]
