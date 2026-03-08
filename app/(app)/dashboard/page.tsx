@@ -11,7 +11,7 @@ export default function DashboardPage() {
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col px-6 py-4 w-full">
       {/* Page header */}
-      <div className="shrink-0 flex items-center justify-between mb-3">
+      <div className="shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
         <h1 className="font-black text-white text-[clamp(28px,3vw,40px)] tracking-tight">Mission Schedule</h1>
         <div className="flex items-center gap-2 bg-[rgba(26,24,23,0.6)] border border-white/10 rounded-xl p-1">
           <button
@@ -43,7 +43,7 @@ export default function DashboardPage() {
           <CalendarGrid />
         </div>
       ) : (
-        <div className="flex-1 min-h-0">
+        <div className="flex-1 min-h-0 flex flex-col">
           <ClassScheduleManager />
         </div>
       )}

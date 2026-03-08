@@ -12,10 +12,10 @@ export default function ProfileBanner() {
       <div className="h-32 bg-[#2a211d]" />
 
       {/* Profile row */}
-      <div className="px-8 pb-8 flex items-end gap-6 -mt-12">
+      <div className="px-4 sm:px-8 pb-4 sm:pb-8 flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 -mt-10 sm:-mt-12">
         {/* Avatar */}
         <div className="relative shrink-0">
-          <div className="w-32 h-32 rounded-2xl border-4 border-[#1a1817] bg-[#3d3632] overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl border-4 border-[#1a1817] bg-[#3d3632] overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
             <img src={imgCommander} alt="Commander Elias Thorne" className="w-full h-full object-cover" />
           </div>
           <div className="absolute -bottom-2 -right-2 w-8 h-[30px]">
@@ -24,22 +24,22 @@ export default function ProfileBanner() {
         </div>
 
         {/* Info */}
-        <div className="flex-1 flex items-end justify-between pb-1">
+        <div className="flex-1 flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:pb-1">
           <div className="flex flex-col gap-1">
-            <h1 className="font-bold text-white text-[30px] tracking-[-0.75px]">Commander Elias Thorne</h1>
-            <div className="flex items-center gap-3">
+            <h1 className="font-bold text-white text-[22px] sm:text-[30px] tracking-[-0.75px]">Commander Elias Thorne</h1>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <div className="flex items-center gap-1">
                 <img src={imgRankIcon} alt="" className="w-1.5 h-3 block" />
                 <span className="text-[rgba(229,225,223,0.7)] text-sm">Rank: Expedition Leader</span>
               </div>
-              <div className="w-1 h-1 rounded-full bg-white/20" />
+              <div className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
               <div className="flex items-center gap-1">
                 <img src={imgLocationIcon} alt="" className="w-2.5 h-3 block" />
                 <span className="text-[rgba(229,225,223,0.7)] text-sm">Sector 4 - Jezero Crater</span>
               </div>
             </div>
           </div>
-          <button className="flex items-center gap-2 bg-[#b05b3d] text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-[0_10px_15px_-3px_rgba(176,91,61,0.2),0_4px_6px_-4px_rgba(176,91,61,0.2)] hover:bg-[#9a4f35] transition-colors cursor-pointer mb-1">
+          <button className="flex items-center gap-2 bg-[#b05b3d] text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-[0_10px_15px_-3px_rgba(176,91,61,0.2),0_4px_6px_-4px_rgba(176,91,61,0.2)] hover:bg-[#9a4f35] transition-colors cursor-pointer self-start sm:self-auto">
             <img src={imgEditIcon} alt="" className="w-[13.5px] h-[13.5px] block" />
             Edit Profile
           </button>

@@ -8,7 +8,7 @@ export default function SurveyPage() {
       <main className="w-full max-w-[440px]">
 
         {/* Card */}
-        <div className="backdrop-blur-md bg-[rgba(61,54,50,0.4)] border border-[rgba(175,90,60,0.2)] rounded-3xl p-8 flex flex-col gap-8 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
+        <div className="backdrop-blur-md bg-[rgba(61,54,50,0.4)] border border-[rgba(175,90,60,0.2)] rounded-3xl p-5 sm:p-8 flex flex-col gap-8 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
 
           {/* Header */}
           <div className="text-center flex flex-col gap-2">

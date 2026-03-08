@@ -101,23 +101,34 @@ export default function StudyWeekGrid() {
     );
   };
 
+  const clampPos = (clientX: number, clientY: number) => {
+    const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
+    const vh = typeof window !== "undefined" ? window.innerHeight : 768;
+    return {
+      x: Math.min(clientX + 16, vw - 260),
+      y: Math.max(10, Math.min(clientY - 180, vh - 340)),
+    };
+  };
+
   const handleEventMouseMove = (e: React.MouseEvent, event: Event) => {
     // Don't override a locked popover with a hover one
     setPopover(prev => {
       if (prev?.locked) return prev;
       cancelHide();
-      return { event, x: e.clientX + 16, y: e.clientY - 180, locked: false };
+      const { x, y } = clampPos(e.clientX, e.clientY);
+      return { event, x, y, locked: false };
     });
   };
 
   const handleEventClick = (e: React.MouseEvent, event: Event) => {
     e.stopPropagation();
     cancelHide();
+    const { x, y } = clampPos(e.clientX, e.clientY);
     setPopover(prev => {
       // Clicking the already-locked event → close
       if (prev?.locked && isSameEvent(prev, event)) return null;
       // Lock at click position
-      return { event, x: e.clientX + 16, y: e.clientY - 180, locked: true };
+      return { event, x, y, locked: true };
     });
   };
 
@@ -209,7 +220,7 @@ export default function StudyWeekGrid() {
       {/* Popover */}
       {popover && (
         <div
-          className={`fixed z-50 w-[240px] backdrop-blur-md bg-[rgba(26,24,23,0.97)] rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.5)] p-4 flex flex-col gap-3 transition-colors ${
+          className={`fixed z-50 w-[min(240px,calc(100vw-32px))] backdrop-blur-md bg-[rgba(26,24,23,0.97)] rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.5)] p-4 flex flex-col gap-3 transition-colors ${
             popover.locked
               ? "border border-[rgba(176,91,61,0.5)]"
               : "border border-[rgba(176,91,61,0.3)]"

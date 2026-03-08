@@ -41,7 +41,7 @@ export default function MatchCard() {
           </div>
 
           {/* Action buttons */}
-          <div className="bg-[rgba(26,24,23,0.4)] border-t border-white/5 flex items-center justify-center gap-28 py-6">
+          <div className="bg-[rgba(26,24,23,0.4)] border-t border-white/5 flex items-center justify-center gap-12 sm:gap-28 py-6">
             <button className="w-14 h-14 rounded-full border border-[rgba(239,68,68,0.5)] flex items-center justify-center hover:bg-[rgba(239,68,68,0.1)] transition-colors cursor-pointer">
               <img src={imgXIcon} alt="Pass" className="w-[17.5px] h-[17.5px] block" />
             </button>
@@ -61,7 +61,7 @@ export default function MatchCard() {
       </div>
 
       {/* Match details panel */}
-      <div className="flex-1 backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-2xl p-8 flex flex-col gap-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-y-auto">
+      <div className="flex-1 backdrop-blur-md bg-[rgba(44,40,38,0.45)] border border-[rgba(176,91,61,0.2)] rounded-2xl p-4 sm:p-8 flex flex-col gap-6 sm:gap-10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] overflow-y-auto">
         {/* Why it fits you */}
         <div className="flex flex-col gap-2">
           <p className="font-extrabold text-[#d98c5f] text-xs tracking-[2.4px] uppercase">Why it fits you</p>
@@ -69,7 +69,7 @@ export default function MatchCard() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-4 sm:gap-6">
           <div className="bg-[rgba(176,91,61,0.1)] border border-[rgba(176,91,61,0.2)] rounded-2xl p-6 flex flex-col gap-2">
             <p className="text-[#6b7280] text-[10px] font-extrabold tracking-[1px] uppercase">Compatibility</p>
             <div className="flex items-center gap-2">
