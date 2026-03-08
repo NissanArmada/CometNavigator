@@ -16,9 +16,12 @@ type CalendarContextType = {
   addSession:     (s: AddedSession) => void;
   removeSession:  (day: number, start: string) => void;
   hasSession:     (day: number, start: string) => boolean;
-  confirmedRecs:  number[];                    // confirmed study rec indices
-  confirmRec:     (rec: StudyRec) => void;     // confirm & add to calendar
+  confirmedRecs:  number[];
+  confirmRec:     (rec: StudyRec) => void;
   isConfirmed:    (index: number) => boolean;
+  deletedKeys:    Set<string>;                 // "col-start" keys of deleted calendar events
+  deleteEvent:    (key: string) => void;
+  isDeleted:      (key: string) => boolean;
 };
 
 const CalendarContext = createContext<CalendarContextType>({
@@ -29,11 +32,15 @@ const CalendarContext = createContext<CalendarContextType>({
   confirmedRecs: [],
   confirmRec:    () => {},
   isConfirmed:   () => false,
+  deletedKeys:   new Set(),
+  deleteEvent:   () => {},
+  isDeleted:     () => false,
 });
 
 export function CalendarProvider({ children }: { children: ReactNode }) {
   const [addedSessions, setAddedSessions] = useState<AddedSession[]>([]);
   const [confirmedRecs, setConfirmedRecs] = useState<number[]>([]);
+  const [deletedKeys,   setDeletedKeys]   = useState<Set<string>>(new Set());
 
   const addSession = (s: AddedSession) =>
     setAddedSessions(prev => [
@@ -56,9 +63,14 @@ export function CalendarProvider({ children }: { children: ReactNode }) {
 
   const isConfirmed = (index: number) => confirmedRecs.includes(index);
 
+  const deleteEvent = (key: string) =>
+    setDeletedKeys(prev => new Set([...prev, key]));
+
+  const isDeleted = (key: string) => deletedKeys.has(key);
+
   return (
     <CalendarContext.Provider
-      value={{ addedSessions, addSession, removeSession, hasSession, confirmedRecs, confirmRec, isConfirmed }}
+      value={{ addedSessions, addSession, removeSession, hasSession, confirmedRecs, confirmRec, isConfirmed, deletedKeys, deleteEvent, isDeleted }}
     >
       {children}
     </CalendarContext.Provider>

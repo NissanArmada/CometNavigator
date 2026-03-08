@@ -52,7 +52,7 @@ export default function ClassScheduleManager() {
           <img src={imgGearIcon} alt="" className="w-[12px] h-[12px] block opacity-70" />
         </div>
 
-        <div className="flex flex-col gap-2 p-3 flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full">
+        <div className="flex flex-col gap-1.5 p-2.5 flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full">
           {studyRecs.map((rec) => {
             const expanded  = expandedIndex === rec.index;
             const confirmed = isConfirmed(rec.index);
@@ -69,42 +69,44 @@ export default function ClassScheduleManager() {
                     : "bg-white/5 border-white/5 hover:border-white/10"
                 }`}
               >
-                {/* Always-visible header row */}
-                <div className={`flex items-center gap-2.5 ${expanded ? "px-3 pt-3 pb-2" : "px-3 py-2"}`}>
+                {/* Header row — single line when collapsed, slightly taller when expanded */}
+                <div className={`flex items-center gap-2 ${expanded ? "px-3 pt-3 pb-1.5" : "px-2.5 py-1.5"}`}>
+                  {/* Badge / icon */}
                   {expanded ? (
-                    <div className="bg-[rgba(176,91,61,0.2)] border border-[rgba(176,91,61,0.4)] rounded-lg w-7 h-7 flex items-center justify-center shrink-0">
-                      <img src={imgGradCapIcon} alt="" className="w-[14px] h-[11px] block" />
+                    <div className="bg-[rgba(176,91,61,0.2)] border border-[rgba(176,91,61,0.4)] rounded-md w-6 h-6 flex items-center justify-center shrink-0">
+                      <img src={imgGradCapIcon} alt="" className="w-[12px] h-[10px] block" />
                     </div>
                   ) : (
-                    <div className="rounded-lg w-7 h-7 flex items-center justify-center shrink-0 bg-[rgba(217,140,95,0.12)] border border-[rgba(217,140,95,0.2)]">
-                      <span className="text-[#d98c5f] text-[11px] font-extrabold">{rec.index}</span>
+                    <div className="rounded-md w-6 h-6 flex items-center justify-center shrink-0 bg-[rgba(217,140,95,0.12)] border border-[rgba(217,140,95,0.2)]">
+                      <span className="text-[#d98c5f] text-[10px] font-extrabold">{rec.index}</span>
                     </div>
                   )}
 
-                  <div className="flex-1 flex flex-col min-w-0">
+                  {/* Label + inline time when collapsed */}
+                  <div className="flex-1 min-w-0">
                     {expanded && (
-                      <span className="text-[#d98c5f] text-[9px] font-extrabold tracking-[1px] uppercase leading-none mb-0.5">
+                      <span className="text-[#d98c5f] text-[9px] font-extrabold tracking-[1px] uppercase leading-none block mb-0.5">
                         Primary Choice
                       </span>
                     )}
-                    <p className="text-white font-bold text-xs leading-[1.3] truncate">{rec.label}</p>
-                    {!expanded && (
-                      <div className="flex items-center gap-1 mt-0.5">
-                        <img src={imgClockIcon} alt="" className="w-[8px] h-[9px] block opacity-60 shrink-0" />
-                        <span className="text-[#9ca3af] text-[10px]">
-                          {DAY_LABELS[rec.col]} · {formatTime(rec.start)} – {formatTime(rec.end)}
+                    <div className="flex items-baseline gap-1.5 min-w-0">
+                      <p className="text-white font-bold text-[11px] leading-none truncate shrink-0 max-w-[120px]">{rec.label}</p>
+                      {!expanded && (
+                        <span className="text-[#9ca3af] text-[9px] truncate">
+                          {DAY_LABELS[rec.col]} · {formatTime(rec.start)}–{formatTime(rec.end)}
                         </span>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
 
+                  {/* Right indicator */}
                   {confirmed && !expanded ? (
-                    <span className="text-[#4ade80] text-[10px] font-extrabold shrink-0">✓</span>
+                    <span className="text-[#4ade80] text-[9px] font-extrabold shrink-0">✓</span>
                   ) : (
                     <img
                       src={imgChevronIcon}
                       alt=""
-                      className={`w-[7px] h-[4px] block opacity-50 shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`}
+                      className={`w-[7px] h-[4px] block opacity-40 shrink-0 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
                     />
                   )}
                 </div>
