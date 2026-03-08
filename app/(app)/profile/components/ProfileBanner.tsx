@@ -8,16 +8,8 @@ const imgEditIcon = "/assets/fba8cd3ef670347efac4f7b923f7d24bd0690846.svg";
 export default function ProfileBanner() {
   return (
     <div className="backdrop-blur-sm bg-[rgba(61,54,50,0.4)] border border-white/5 rounded-xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(0,0,0,0.5)]">
-      {/* Banner image */}
-      <div className="relative h-32">
-        <img
-          src={imgBanner}
-          alt=""
-          className="absolute w-full object-cover"
-          style={{ height: "561.33%", top: "-230.66%" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1817] to-transparent" />
-      </div>
+      {/* Banner */}
+      <div className="h-32 bg-[#2a211d]" />
 
       {/* Profile row */}
       <div className="px-8 pb-8 flex items-end gap-6 -mt-12">

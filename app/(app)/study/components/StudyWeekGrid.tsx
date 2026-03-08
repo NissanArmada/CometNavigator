@@ -106,7 +106,7 @@ export default function StudyWeekGrid() {
     setPopover(prev => {
       if (prev?.locked) return prev;
       cancelHide();
-      return { event, x: e.clientX + 16, y: e.clientY - 40, locked: false };
+      return { event, x: e.clientX + 16, y: e.clientY - 180, locked: false };
     });
   };
 
@@ -117,7 +117,7 @@ export default function StudyWeekGrid() {
       // Clicking the already-locked event → close
       if (prev?.locked && isSameEvent(prev, event)) return null;
       // Lock at click position
-      return { event, x: e.clientX + 16, y: e.clientY - 40, locked: true };
+      return { event, x: e.clientX + 16, y: e.clientY - 180, locked: true };
     });
   };
 
