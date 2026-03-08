@@ -7,9 +7,9 @@ class Settings:
     DATABASE_URL: str = config("DATABASE_URL", default="mongodb://localhost:27017")
     DATABASE_NAME: str = config("DATABASE_NAME", default="cometnavigator")
 
-    # FIREBASE_CREDENTIALS = json.loads(
-    #     config("FIREBASE_CREDENTIALS", default="{}")
-    # )
+    FIREBASE_CREDENTIALS = json.loads(
+        config("FIREBASE_CREDENTIALS", default="{}")
+    )
 
     ALLOWED_ORIGINS: List[str] = ["*"]  # todo - change this to meteormate.com when site is live
     DEBUG: bool = config("DEBUG", default=False, cast=bool)
@@ -38,15 +38,6 @@ class Settings:
     LAST_NAME_MAX_LEN: int = 50
     MIN_AGE: int = 16
     MAX_AGE: int = 80
-
-    # Firebase REST client keys
-    FIREBASE_API_KEY: str = config("FIREBASE_API_KEY", default="")
-    FIREBASE_AUTH_DOMAIN: str = config("FIREBASE_AUTH_DOMAIN", default="")
-    FIREBASE_PROJECT_ID: str = config("FIREBASE_PROJECT_ID", default="")
-    FIREBASE_STORAGE_BUCKET: str = config("FIREBASE_STORAGE_BUCKET", default="")
-    FIREBASE_MESSAGING_SENDER_ID: str = config("FIREBASE_MESSAGING_SENDER_ID", default="")
-    FIREBASE_APP_ID: str = config("FIREBASE_APP_ID", default="")
-    FIREBASE_MEASUREMENT_ID: str = config("FIREBASE_MEASUREMENT_ID", default="")
 
 
 
