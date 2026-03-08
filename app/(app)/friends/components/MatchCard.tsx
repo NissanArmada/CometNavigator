@@ -1,11 +1,11 @@
-const imgMatchProfile = "http://localhost:3845/assets/5ed9d9b7e7339cb6276a0f230476ee9a605543fc.png";
-const imgXIcon = "http://localhost:3845/assets/8bea1cc3709094304846f6a664f37ff3ebb18ccb.svg";
-const imgHeartIcon = "http://localhost:3845/assets/28361b9f586846401dc1e4d87a59e976e4b31c84.svg";
-const imgChevLeft = "http://localhost:3845/assets/c03e002bc076f48e8d1dda8bb287f9850df2c298.svg";
-const imgChevRight = "http://localhost:3845/assets/02e4ed7851f7c14e5cf00b56e5f03e0281388388.svg";
-const imgLightning = "http://localhost:3845/assets/fd4d71981f2085907475998e406f2330b2880a85.svg";
-const imgFlask = "http://localhost:3845/assets/968b94675a190c77f1caba04faf2153173cce6d3.svg";
-const imgCheckIcon = "http://localhost:3845/assets/53683aa1e8beaa9e633f85252451b3849050af3c.svg";
+const imgMatchProfile = "/assets/5ed9d9b7e7339cb6276a0f230476ee9a605543fc.png";
+const imgXIcon = "/assets/8bea1cc3709094304846f6a664f37ff3ebb18ccb.svg";
+const imgHeartIcon = "/assets/28361b9f586846401dc1e4d87a59e976e4b31c84.svg";
+const imgChevLeft = "/assets/c03e002bc076f48e8d1dda8bb287f9850df2c298.svg";
+const imgChevRight = "/assets/02e4ed7851f7c14e5cf00b56e5f03e0281388388.svg";
+const imgLightning = "/assets/fd4d71981f2085907475998e406f2330b2880a85.svg";
+const imgFlask = "/assets/968b94675a190c77f1caba04faf2153173cce6d3.svg";
+const imgCheckIcon = "/assets/53683aa1e8beaa9e633f85252451b3849050af3c.svg";
 
 const schedule = [
   { time: "08:00 AM", title: "Geology Briefing", location: "Command Center", status: "done" },

@@ -1,7 +1,7 @@
 import ClubCard from "./components/ClubCard";
 
-const imgQuantumIcon = "http://localhost:3845/assets/ee732cf4fa2314812fc26c9caa8cb3b8151bf697.svg";
-const imgDomeIcon = "http://localhost:3845/assets/7bc124676c5809172f1761e2fb57147e17d87fc3.svg";
+const imgQuantumIcon = "/assets/ee732cf4fa2314812fc26c9caa8cb3b8151bf697.svg";
+const imgDomeIcon = "/assets/7bc124676c5809172f1761e2fb57147e17d87fc3.svg";
 
 const clubs = [
   {

@@ -1,7 +1,7 @@
-const imgIcon = "http://localhost:3845/assets/7c61dbb737868f6a701e995296db8b91910da351.svg";
-const imgAresIcon = "http://localhost:3845/assets/c3170690b7b27f45b2847a02f4def5a831764ef7.svg";
-const imgOutpostIcon = "http://localhost:3845/assets/81a32ec2755f5e8d835849ea8f163006b7f2bda1.svg";
-const imgChevron = "http://localhost:3845/assets/dca8f8c4fd1cd6fb95563348550495a38b9f80bd.svg";
+const imgIcon = "/assets/7c61dbb737868f6a701e995296db8b91910da351.svg";
+const imgAresIcon = "/assets/c3170690b7b27f45b2847a02f4def5a831764ef7.svg";
+const imgOutpostIcon = "/assets/81a32ec2755f5e8d835849ea8f163006b7f2bda1.svg";
+const imgChevron = "/assets/dca8f8c4fd1cd6fb95563348550495a38b9f80bd.svg";
 
 const units = [
   {

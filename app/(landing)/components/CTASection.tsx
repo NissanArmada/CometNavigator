@@ -1,5 +1,5 @@
 const imgTexture =
-  "http://localhost:3845/assets/73db72c49a899f1e8803d4a3d25e02fa0235a0a3.png";
+  "/assets/73db72c49a899f1e8803d4a3d25e02fa0235a0a3.png";
 
 export default function CTASection() {
   return (

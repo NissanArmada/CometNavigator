@@ -1,9 +1,9 @@
-const imgBanner = "http://localhost:3845/assets/1718fc2ea1450b03a7b1506b490c9312ce0ff2bc.png";
-const imgCommander = "http://localhost:3845/assets/2d224258d455368f9c19f214035178d645dca903.png";
-const imgBadge = "http://localhost:3845/assets/a7813c3f07aef2fad5904b76a116e0d8f526a4a6.svg";
-const imgRankIcon = "http://localhost:3845/assets/68eddbff2a68a97c6bb0b1005aeac365025bf77a.svg";
-const imgLocationIcon = "http://localhost:3845/assets/91fe9d97ef4b207cda0e7257747d657328922178.svg";
-const imgEditIcon = "http://localhost:3845/assets/fba8cd3ef670347efac4f7b923f7d24bd0690846.svg";
+const imgBanner = "/assets/1718fc2ea1450b03a7b1506b490c9312ce0ff2bc.png";
+const imgCommander = "/assets/2d224258d455368f9c19f214035178d645dca903.png";
+const imgBadge = "/assets/a7813c3f07aef2fad5904b76a116e0d8f526a4a6.svg";
+const imgRankIcon = "/assets/68eddbff2a68a97c6bb0b1005aeac365025bf77a.svg";
+const imgLocationIcon = "/assets/91fe9d97ef4b207cda0e7257747d657328922178.svg";
+const imgEditIcon = "/assets/fba8cd3ef670347efac4f7b923f7d24bd0690846.svg";
 
 export default function ProfileBanner() {
   return (

@@ -1,10 +1,44 @@
-import Link from "next/link";
+"use client";
 
-const imgLogo = "http://localhost:3845/assets/66fbdce0468157c30a2bf4eea33f97c3f7199d0b.svg";
-const imgEmailCheck = "http://localhost:3845/assets/2f3acfb434eedbf292654b4a52475208abd1623c.svg";
-const imgArrow = "http://localhost:3845/assets/edc88a4d18a1ece080791cdd69969da7344d954e.svg";
+import Link from "next/link";
+import { useRef, useState, KeyboardEvent, ClipboardEvent } from "react";
+
+const imgLogo = "/assets/66fbdce0468157c30a2bf4eea33f97c3f7199d0b.svg";
+const imgEmailCheck = "/assets/2f3acfb434eedbf292654b4a52475208abd1623c.svg";
+const imgArrow = "/assets/edc88a4d18a1ece080791cdd69969da7344d954e.svg";
 
 export default function VerifyCard() {
+  const [digits, setDigits] = useState<string[]>(Array(6).fill(""));
+  const inputs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleChange = (i: number, val: string) => {
+    const d = val.replace(/\D/g, "").slice(-1);
+    const next = [...digits];
+    next[i] = d;
+    setDigits(next);
+    if (d && i < 5) inputs.current[i + 1]?.focus();
+  };
+
+  const handleKeyDown = (i: number, e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace" && !digits[i] && i > 0) {
+      inputs.current[i - 1]?.focus();
+    }
+    if (e.key === "ArrowLeft" && i > 0) inputs.current[i - 1]?.focus();
+    if (e.key === "ArrowRight" && i < 5) inputs.current[i + 1]?.focus();
+  };
+
+  const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+    const next = [...digits];
+    pasted.split("").forEach((ch, i) => { next[i] = ch; });
+    setDigits(next);
+    const last = Math.min(pasted.length, 5);
+    inputs.current[last]?.focus();
+  };
+
+  const filled = digits.every(Boolean);
+
   return (
     <div className="flex flex-col items-center gap-0 w-full max-w-[480px] mx-auto">
       {/* Branding */}
@@ -34,14 +68,43 @@ export default function VerifyCard() {
         <div className="flex flex-col items-center gap-4 px-16 pb-8">
           <h2 className="font-semibold text-white text-[30px] tracking-[-0.75px] text-center">Verify Your Email</h2>
           <p className="text-[#94a3b8] text-base leading-[26px] text-center">
-            We sent a verification link to your email address. Please confirm to proceed.
+            Enter the 6-digit code we sent to your email address.
           </p>
+        </div>
+
+        {/* Code inputs */}
+        <div className="flex justify-center gap-3 px-10 pb-8">
+          {digits.map((d, i) => (
+            <input
+              key={i}
+              ref={(el) => { inputs.current[i] = el; }}
+              type="text"
+              inputMode="numeric"
+              maxLength={1}
+              value={d}
+              onChange={(e) => handleChange(i, e.target.value)}
+              onKeyDown={(e) => handleKeyDown(i, e)}
+              onPaste={handlePaste}
+              className={`w-12 h-14 text-center text-white text-xl font-bold rounded-xl border bg-[rgba(26,24,23,0.5)] outline-none transition-colors caret-transparent ${
+                d
+                  ? "border-[rgba(217,140,95,0.6)] bg-[rgba(176,91,61,0.15)]"
+                  : "border-white/10 focus:border-[rgba(217,140,95,0.4)]"
+              }`}
+            />
+          ))}
         </div>
 
         {/* Actions */}
         <div className="flex flex-col items-center gap-8 px-16 pb-14">
           <Link href="/dashboard" className="w-full">
-            <button className="w-full bg-[#b05b3d] text-white font-semibold text-sm tracking-[0.35px] py-2.5 rounded-2xl flex items-center justify-center gap-3 shadow-[0_20px_25px_-5px_rgba(176,91,61,0.1),0_8px_10px_-6px_rgba(176,91,61,0.1)] hover:bg-[#9a4f35] transition-colors cursor-pointer">
+            <button
+              disabled={!filled}
+              className={`w-full text-white font-semibold text-sm tracking-[0.35px] py-2.5 rounded-2xl flex items-center justify-center gap-3 transition-colors cursor-pointer ${
+                filled
+                  ? "bg-[#b05b3d] shadow-[0_20px_25px_-5px_rgba(176,91,61,0.1),0_8px_10px_-6px_rgba(176,91,61,0.1)] hover:bg-[#9a4f35]"
+                  : "bg-[rgba(176,91,61,0.3)] cursor-not-allowed"
+              }`}
+            >
               Continue to Dashboard
               <img src={imgArrow} alt="" className="w-[12.5px] h-[12.5px] block" />
             </button>
@@ -49,7 +112,7 @@ export default function VerifyCard() {
           <div className="flex items-center gap-2">
             <span className="text-[#64748b] text-sm font-medium">Didn&apos;t receive it?</span>
             <button className="text-[#d98c5f] text-sm font-bold underline decoration-[rgba(217,140,95,0.3)] hover:text-[#af5a3c] transition-colors cursor-pointer">
-              Resend Email
+              Resend Code
             </button>
           </div>
         </div>
