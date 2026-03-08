@@ -60,7 +60,7 @@ export default function LoginCard() {
 
           {/* Submit */}
           <div className="pt-2">
-            <Link href="/dashboard">
+            <Link href="/onboard-survey">
               <button className="w-full bg-[#af5a3c] text-white font-bold text-base py-4 rounded-2xl flex items-center justify-center gap-2 shadow-[0_10px_15px_-3px_rgba(175,90,60,0.2),0_4px_6px_-4px_rgba(175,90,60,0.2)] hover:bg-[#9a4f35] transition-colors cursor-pointer">
                 Begin Mission
                 <img src={imgArrowIcon} alt="" className="w-[15px] h-[15px] block" />
