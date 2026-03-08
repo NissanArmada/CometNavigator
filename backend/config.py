@@ -5,6 +5,7 @@ from typing import List
 
 class Settings:
     DATABASE_URL: str = config("DATABASE_URL")
+    DATABASE_NAME: str = config("DATABASE_NAME")
 
     # FIREBASE_CREDENTIALS = json.loads(
     #     config("FIREBASE_CREDENTIALS", default="{}")
