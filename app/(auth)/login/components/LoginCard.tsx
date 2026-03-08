@@ -68,14 +68,6 @@ export default function LoginCard() {
             </Link>
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="border-t border-[rgba(51,65,85,0.5)] pt-6 flex items-center justify-center gap-1">
-          <span className="text-[#94a3b8] text-sm">New explorer?</span>
-          <Link href="/signup" className="text-[#d98c5f] text-sm font-bold underline decoration-[rgba(217,140,95,0.3)] hover:text-[#af5a3c] transition-colors">
-            Create New Account
-          </Link>
-        </div>
       </div>
     </div>
   );

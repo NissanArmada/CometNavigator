@@ -21,7 +21,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-[rgba(175,90,60,0.05)] px-6 py-24">
+    <section id="how-it-works" className="bg-[rgba(175,90,60,0.05)] px-6 py-24">
       <div className="max-w-[1280px] mx-auto flex flex-col gap-16">
         {/* Header */}
         <div className="flex flex-col gap-4 items-center text-center">

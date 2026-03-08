@@ -24,12 +24,14 @@ export default function AppNavbar() {
     <header className="backdrop-blur-md bg-[rgba(26,24,23,0.4)] border-b border-[rgba(176,91,61,0.1)] h-16 flex items-center px-8 shrink-0 w-full z-50 sticky top-0">
       <div className="flex items-center w-full max-w-[1280px] mx-auto">
         {/* Logo */}
-        <div className="flex items-center gap-2 w-[220px] shrink-0 pl-3">
+        <Link href="/" className="flex items-center gap-2 w-[220px] shrink-0 pl-3 hover:opacity-80 transition">
           <div className="bg-[#af5a3c] flex items-center justify-center p-1.5 rounded-2xl">
             <img src={imgLogo} alt="Comet" className="w-5 h-5 block" />
           </div>
-          <span className="font-bold text-[#f1f5f9] text-xl tracking-[-0.5px]">Comet Navigation</span>
-        </div>
+          <span className="font-bold text-[#f1f5f9] text-xl tracking-[-0.5px]">
+            Comet Navigation
+          </span>
+        </Link>
 
         {/* Nav links */}
         <nav className="flex items-center gap-0 flex-1 justify-center px-[150px]">

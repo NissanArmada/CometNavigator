@@ -1,3 +1,5 @@
+import Link from "next/dist/client/link";
+
 const imgTexture =
   "/assets/73db72c49a899f1e8803d4a3d25e02fa0235a0a3.png";
 
@@ -28,12 +30,11 @@ export default function CTASection() {
 
           {/* Buttons */}
           <div className="relative flex flex-wrap gap-4 justify-center pt-4">
-            <button className="bg-white text-[#af5a3c] font-bold text-base px-10 py-[17px] rounded-full shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.1)] hover:bg-gray-50 transition-colors cursor-pointer">
-              Get Started Now
-            </button>
-            <button className="backdrop-blur-md bg-[rgba(26,24,23,0.2)] border border-white/20 text-white font-bold text-base px-10 py-[17px] rounded-full hover:bg-[rgba(26,24,23,0.35)] transition-colors cursor-pointer">
-              Sign In
-            </button>
+            <Link href="/login">
+              <button className="backdrop-blur-md bg-[rgba(26,24,23,0.2)] border border-white/20 text-white font-bold text-base px-10 py-[17px] rounded-full hover:bg-[rgba(26,24,23,0.35)] transition-colors cursor-pointer">
+                Sign In
+              </button>
+            </Link>
           </div>
         </div>
       </div>
