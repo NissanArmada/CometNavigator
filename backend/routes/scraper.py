@@ -1,5 +1,6 @@
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timedelta
 
 from fastapi import APIRouter
 from playwright.sync_api import sync_playwright, expect, Browser, Page, Playwright
@@ -13,6 +14,15 @@ from config import settings
 logger = logging.getLogger("cometnavigator." + __name__)
 
 router = APIRouter()
+
+
+def get_week_bounds() -> tuple[datetime, datetime]:
+    today = datetime.now()
+    monday = today - timedelta(days=today.weekday())
+    sunday = monday + timedelta(days=6)
+    return monday.replace(hour=0, minute=0, second=0), sunday.replace(
+        hour=23, minute=59, second=59
+    )
 
 
 def login(netid: str, password: str) -> tuple[Playwright, Browser, Page]:
@@ -163,3 +173,89 @@ def get_courses(credentials: ScraperCredentials):
             enriched.append(future.result())
 
     return {"data": enriched}
+
+
+@router.post("/due-dates")
+def get_due_dates(credentials: ScraperCredentials):
+    logger.info("Received request to get due dates for netid %s", credentials.netid)
+
+    p, browser, page = login(credentials.netid, credentials.password)
+    try:
+        page.goto("https://elearning.utdallas.edu/ultra/calendar", timeout=10000)
+
+        page.locator("#bb-calendar1-deadline").click(timeout=10000)
+        page.locator("div.deadline-list").locator("div.deadlines").focus()
+
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        end_date = today + timedelta(days=7)
+        logger.info(
+            "Fetching due dates from %s to %s",
+            today.strftime("%m/%d/%Y"),
+            end_date.strftime("%m/%d/%Y"),
+        )
+
+        due_dates = []
+
+        while True:
+            page.wait_for_load_state("networkidle", timeout=10000)
+            dates = page.locator("div.due-item-block").all()
+
+            past_end = False
+            prev_count = len(dates)
+
+            for date in dates:
+                if not date.is_visible():
+                    continue
+
+                card = date.locator("div.element-card")
+                raw_date = (
+                    card.locator("div.content")
+                    .locator("span")
+                    .first.inner_text()
+                    .strip()
+                    .split(",")[0]
+                )
+                raw_date = raw_date[len("Due date: ") :]
+
+                try:
+                    curr_date = datetime.strptime(raw_date, "%m/%d/%y")
+                except ValueError:
+                    continue
+
+                if curr_date > end_date:
+                    past_end = True
+                    break
+
+                if curr_date < today:
+                    continue
+
+                for name in card.locator("div.name").all_inner_texts():
+                    due_dates.append(
+                        {
+                            "date": curr_date.strftime("%m/%d/%Y"),
+                            "name": name.strip(),
+                        }
+                    )
+
+            if past_end:
+                break
+
+            scrollable = page.locator("div.deadline-list").locator("div.deadlines")
+            scrollable.hover()
+            page.mouse.wheel(0, 250)
+            page.wait_for_timeout(250)
+
+            new_count = page.locator("div.due-item-block").count()
+            if new_count == prev_count:
+                break
+
+    except Exception as e:
+        logger.error(
+            "Error scraping due dates for netid %s: %s", credentials.netid, str(e)
+        )
+        raise InternalServerError("An error occurred while scraping due dates")
+    finally:
+        browser.close()
+        p.stop()
+
+    return {"data": due_dates}

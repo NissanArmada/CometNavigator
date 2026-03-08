@@ -13,7 +13,6 @@ import uvicorn
 from database import connect_db, disconnect_db
 from config import settings
 from exceptions import AppException
-from auth.router import router as auth_router
 from onboarding.router import router as onboarding_router
 from routes import scraper, auth
 
