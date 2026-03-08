@@ -8,9 +8,9 @@ export default function FriendsPage() {
   const [tab, setTab] = useState<"friends" | "matching">("friends");
 
   return (
-    <div className="p-8 max-w-[1280px] mx-auto flex flex-col gap-8">
+    <div className="p-4 sm:p-8 max-w-[1280px] mx-auto flex flex-col gap-8">
       {/* Header */}
-      <div className="flex items-end justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
           <h1 className="font-extrabold text-white text-[clamp(28px,3vw,36px)] tracking-[-0.9px]">Mission Personnel</h1>
           <div className="flex items-center gap-2 mt-1">

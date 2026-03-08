@@ -22,7 +22,7 @@ export default function SignUpCard() {
 
       {/* Card */}
       <div
-        className="backdrop-blur-md border border-white/5 rounded-[32px] p-10 flex flex-col gap-8 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8),0_0_20px_0_rgba(176,91,61,0.05)]"
+        className="backdrop-blur-md border border-white/5 rounded-[32px] p-6 sm:p-10 flex flex-col gap-8 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8),0_0_20px_0_rgba(176,91,61,0.05)]"
         style={{ background: "linear-gradient(145deg, rgba(61,54,50,0.8) 0%, rgba(44,40,38,0.9) 100%)" }}
       >
         {/* Header */}

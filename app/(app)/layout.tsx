@@ -1,4 +1,5 @@
-//This is supposed to delete the Nav bar from the survey page.
+// NavbarWrapper conditionally hides the nav bar on the survey page.
+import { CalendarProvider } from "./CalendarContext";
 import NavbarWrapper from "./components/NavbarWrapper";
 
 const imgBg = "/assets/e81843a9f0e2b7df5802f930d077cd7023c7d6aa.png";
@@ -19,9 +20,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   <NavbarWrapper />
 
-      <main className="flex-1 relative z-10">
-        {children}
-      </main>
+      <CalendarProvider>
+        <main className="flex-1 relative z-10">
+          {children}
+        </main>
+      </CalendarProvider>
     </div>
   );
 }
