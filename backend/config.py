@@ -23,10 +23,10 @@ class Settings:
     NEBULA_API_KEY: str = config("NEBULA_API_KEY", default="")
 
     # email config - might not need this at all
-    SMTP_SERVER: str = config("SMTP_SERVER", default="")
+    SMTP_HOST: str = config("SMTP_HOST", default="")
     SMTP_PORT: int = config("SMTP_PORT", default=587, cast=int)
-    EMAIL_USER: str = config("EMAIL_USER", default="")
-    EMAIL_PASSWORD: str = config("EMAIL_PASSWORD", default="")
+    SMTP_USER: str = config("SMTP_USER", default="")
+    SMTP_PASSWORD: str = config("SMTP_PASSWORD", default="")
 
     # cron config (i.e. admin token for cron jobs to perform administrative duties)
     CRON_SECRET: str = config("CRON_SECRET", default="")
