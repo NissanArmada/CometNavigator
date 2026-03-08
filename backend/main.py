@@ -13,6 +13,7 @@ from config import settings
 from exceptions import AppException
 from routes import scraper
 from auth.router import router as auth_router
+from onboarding.router import router as onboarding_router
 
 
 def create_app() -> FastAPI:
@@ -79,6 +80,7 @@ def create_app() -> FastAPI:
     # Routes
     app.include_router(scraper.router, prefix="/scraper", tags=["scraper"])
     app.include_router(auth_router, prefix="/auth", tags=["auth"])
+    app.include_router(onboarding_router, prefix="/onboarding", tags=["onboarding"])
 
     @app.get("")
     async def root_no_slash():

@@ -1,6 +1,13 @@
 import json
+import os
+from pathlib import Path
 from decouple import config
 from typing import List
+
+# Load .env file
+from dotenv import load_dotenv
+env_path = Path(__file__).parent.parent / ".env"
+load_dotenv(env_path)
 
 
 class Settings:
