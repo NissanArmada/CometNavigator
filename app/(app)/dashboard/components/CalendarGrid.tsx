@@ -79,7 +79,7 @@ type Props = {
 
 export default function CalendarGrid({ mode = "calendar", onRecClick }: Props) {
   const totalH = hours.length * ROW_H;
-  const { addedSessions, isConfirmed } = useCalendar();
+  const { addedSessions, isConfirmed, isDeleted, deleteEvent } = useCalendar();
 
   const colW = 100 / 7;
 
@@ -174,15 +174,38 @@ export default function CalendarGrid({ mode = "calendar", onRecClick }: Props) {
             {/* ── Events layer ── */}
             <div className="absolute inset-0 pointer-events-none">
 
-              {/* 1. Calendar events from calendars.json
-                    - calendar mode: full opacity
-                    - schedule mode: dimmed (30% opacity) */}
+              {/* 1. Calendar events from calendars.json */}
               {events.map((ev, i) => {
-                const s = typeStyle[ev.type];
+                const key = `${ev.col}-${ev.start}`;
+                if (isDeleted(key)) return null;
+                const s       = typeStyle[ev.type];
                 const opacity = mode === "schedule" ? 0.3 : 1;
+                const startY  = time24ToY(ev.start);
+                const endY    = time24ToY(ev.end);
+                const evH     = Math.max(endY - startY, 30);
                 return (
-                  <div key={`cal-${i}`}>
-                    {eventBlock(ev.col, ev.start, ev.end, s.bg, s.border, s.timeColor, ev.title, ev.subtitle, opacity)}
+                  <div
+                    key={`cal-${i}`}
+                    className="absolute p-[4px] pointer-events-auto group"
+                    style={{ top: startY, left: `${ev.col * colW}%`, right: `${(6 - ev.col) * colW}%`, opacity }}
+                  >
+                    <div
+                      className={`${s.bg} border-l-4 ${s.border} rounded-br-[4px] rounded-tr-[4px] pl-3 pr-2 py-2 flex flex-col overflow-hidden relative`}
+                      style={{ height: evH }}
+                    >
+                      <p className="text-white text-[10px] font-bold leading-[15px] truncate">{ev.title}</p>
+                      {ev.subtitle && <p className="text-white/50 text-[9px] leading-none truncate">{ev.subtitle}</p>}
+                      <p className={`${s.timeColor} text-[9px] leading-[13.5px] mt-auto`}>
+                        {formatTime(ev.start)} – {formatTime(ev.end)}
+                      </p>
+                      {/* Delete on hover */}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); deleteEvent(key); }}
+                        className="absolute top-0.5 right-0.5 w-[14px] h-[14px] rounded-full bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:bg-red-500/80"
+                      >
+                        <span className="text-white text-[9px] leading-none font-bold">×</span>
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -196,7 +219,6 @@ export default function CalendarGrid({ mode = "calendar", onRecClick }: Props) {
                 const startY = time24ToY(rec.start);
                 const endY   = time24ToY(rec.end);
                 const evH    = Math.max(endY - startY, 30);
-                const colW   = 100 / 7;
 
                 const isSchedule = mode === "schedule";
                 const canClick   = isSchedule && !!onRecClick;
