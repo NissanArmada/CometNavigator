@@ -3,18 +3,19 @@
 import { useState } from "react";
 
 const days = [
-  { short: "MON", num: "12" },
-  { short: "TUE", num: "13" },
-  { short: "WED", num: "14" },
-  { short: "THU", num: "15", today: true },
-  { short: "FRI", num: "16" },
-  { short: "SAT", num: "17" },
-  { short: "SUN", num: "18" },
+  { short: "MON", num: "2" },
+  { short: "TUE", num: "3" },
+  { short: "WED", num: "4" },
+  { short: "THU", num: "5" },
+  { short: "FRI", num: "6" },
+  { short: "SAT", num: "7", today: true },
+  { short: "SUN", num: "8" },
 ];
 
 const hours = [
   "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
-  "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM",
+  "1:00 PM",  "2:00 PM",  "3:00 PM",  "4:00 PM",
+  "5:00 PM",  "6:00 PM",  "7:00 PM",  "8:00 PM",  "9:00 PM",
 ];
 
 type Event = {
@@ -42,30 +43,28 @@ const typeColors: Record<Event["type"], string> = {
   other:     "border-white/10 bg-white/5 text-[#9ca3af]",
 };
 
+// Row index: 9 AM = 0, 10 AM = 1, ... 9 PM = 12
 const events: Event[] = [
-  { day: 0, startRow: 0, span: 2, label: "Astro-Biology 101", sublabel: "Bio-Dome Pod B", type: "theory", host: "Dr. Aris Thorne", participants: 14, topic: "Cellular adaptation in low-gravity environments" },
-  { day: 0, startRow: 2, span: 1, label: "Gym Session", sublabel: "Hab-Unit 3", type: "other", host: "Cmdr. Reyes", participants: 6, topic: "Core strength & EVA readiness" },
-  { day: 1, startRow: 1, span: 1, label: "Meal Prep", sublabel: "", type: "other", host: "Crew Rota", participants: 4, topic: "High-calorie ration assembly" },
-  { day: 1, startRow: 3, span: 3, label: "Deep Space Comms", sublabel: "Comms Relay 440", type: "practical", host: "Lt. Vasquez", participants: 3, topic: "Long-range signal encoding & delay compensation" },
-  { day: 2, startRow: 0, span: 2, label: "Hydroponic Cycles", sublabel: "Hydro Labs", type: "workshop", host: "Dr. Nkosi", participants: 9, topic: "Nutrient calibration for Batch 7 crop cycle" },
-  { day: 2, startRow: 5, span: 1, label: "Family Comms", sublabel: "Relay Substation", type: "family", host: "Personal", participants: 1, topic: "Scheduled personal transmission window" },
-  { day: 3, startRow: 1, span: 1, label: "Lab Cleanup", sublabel: "", type: "other", host: "Duty Roster", participants: 5, topic: "Bio-containment decontamination protocol" },
-  { day: 3, startRow: 4, span: 3, label: "Atmospheric Analysis", sublabel: "", type: "field", host: "Dr. Okafor", participants: 11, topic: "Dust storm particulate sampling & pressure mapping", badge: "+8" },
-  { day: 4, startRow: 2, span: 1, label: "Personal Study", sublabel: "Library Deck", type: "personal", host: "Self-directed", participants: 1, topic: "Advanced orbital mechanics review" },
-  { day: 5, startRow: 2, span: 3, label: "System Overhaul", sublabel: "Base-Wide", type: "maint", host: "Eng. Holt", participants: 8, topic: "Life support redundancy & power grid audit" },
-  { day: 5, startRow: 4, span: 2, label: "Rover Prep", sublabel: "", type: "other", host: "Eng. Holt", participants: 4, topic: "Pre-mission checklist & terrain calibration" },
-  { day: 6, startRow: 5, span: 2, label: "Emergency Protocols", sublabel: "Level 4 East Wing", type: "safety", host: "Cmdr. Reyes", participants: 22, topic: "Breach response drills & suit pressurisation" },
-  { day: 6, startRow: 6, span: 1, label: "Observation", sublabel: "", type: "other", host: "Dr. Aris Thorne", participants: 7, topic: "Phobos transit tracking & data logging" },
+  // MON 2026-03-02
+  { day: 0, startRow: 6,  span: 2, label: "CS 3345 Midterm Prep",     sublabel: "JSOM 1.118",            type: "theory",    host: "Peer Group", participants: 4, topic: "Graphs and Trees" },
+  { day: 0, startRow: 9,  span: 2, label: "PHYS 2325 Homework Help",  sublabel: "McDermott Library",     type: "workshop",  host: "Peer Group", participants: 2, topic: "Newton's Laws and Kinematics" },
+  // TUE 2026-03-03
+  { day: 1, startRow: 4,  span: 2, label: "MATH 2418 Study Group",    sublabel: "JSOM 2.803",            type: "theory",    host: "Peer Group", participants: 3, topic: "Eigenvalues and Eigenvectors" },
+  { day: 1, startRow: 7,  span: 2, label: "CS 4349 Algorithm Review", sublabel: "ECSS 2.203",            type: "workshop",  host: "Peer Group", participants: 5, topic: "Dynamic Programming" },
+  // WED 2026-03-04
+  { day: 2, startRow: 5,  span: 2, label: "EE 3301 Signals Review",   sublabel: "ECSS 3.910",            type: "practical", host: "Peer Group", participants: 3, topic: "Fourier Transform" },
+  // THU 2026-03-05
+  { day: 3, startRow: 1,  span: 3, label: "CS 3345 Final Exam Prep",  sublabel: "GR 3.302",              type: "theory",    host: "Peer Group", participants: 6, topic: "Sorting Algorithms and Complexity" },
+  { day: 3, startRow: 8,  span: 1, label: "PHYS 2325 Lab Report",     sublabel: "SOM 1.110",             type: "workshop",  host: "Peer Group", participants: 2, topic: "Projectile Motion Lab" },
+  { day: 3, startRow: 10, span: 2, label: "MATH 2418 Practice",       sublabel: "JSOM 2.803",            type: "theory",    host: "Peer Group", participants: 4, topic: "Matrix Decomposition" },
+  // FRI 2026-03-06
+  { day: 4, startRow: 7,  span: 2, label: "CS 4349 Homework Session", sublabel: "ECSS 2.203",            type: "workshop",  host: "Peer Group", participants: 3, topic: "Greedy Algorithms" },
 ];
 
 const GUTTER = 80;
 const ROW_H = 72;
 
-type PopoverState = {
-  event: Event;
-  x: number;
-  y: number;
-} | null;
+type PopoverState = { event: Event; x: number; y: number } | null;
 
 export default function StudyWeekGrid() {
   const [popover, setPopover] = useState<PopoverState>(null);
