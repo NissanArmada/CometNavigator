@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "ObjectId('64f8a1b2c3d4e5f600000001')",
+    "user_id": "firebase_uid_001",
+    "name": "CS 3345 - Data Structures and Introduction to Algorithmic Analysis",
+    "instructor": "Dr. Karen Ho",
+    "meeting_days": ["Tuesday", "Thursday"],
+    "start_time": "10:00",
+    "end_time": "11:15"
+  },
+  {
+    "_id": "ObjectId('64f8a1b2c3d4e5f600000002')",
+    "user_id": "firebase_uid_001",
+    "name": "PHYS 2325 - University Physics I",
+    "instructor": "Dr. Marcus Webb",
+    "meeting_days": ["Monday", "Wednesday", "Friday"],
+    "start_time": "09:00",
+    "end_time": "09:50"
+  },
+  {
+    "_id": "ObjectId('64f8a1b2c3d4e5f600000003')",
+    "user_id": "firebase_uid_001",
+    "name": "MATH 2418 - Linear Algebra",
+    "instructor": "Dr. Priya Nair",
+    "meeting_days": ["Monday", "Wednesday"],
+    "start_time": "14:00",
+    "end_time": "15:15"
+  },
+  {
+    "_id": "ObjectId('64f8a1b2c3d4e5f600000004')",
+    "user_id": "firebase_uid_002",
+    "name": "CS 4349 - Advanced Algorithm Design and Analysis",
+    "instructor": "Dr. Samuel Torres",
+    "meeting_days": ["Tuesday", "Thursday"],
+    "start_time": "13:00",
+    "end_time": "14:15"
+  },
+  {
+    "_id": "ObjectId('64f8a1b2c3d4e5f600000005')",
+    "user_id": "firebase_uid_002",
+    "name": "EE 3301 - Signals and Systems",
+    "instructor": "Dr. Fiona Chan",
+    "meeting_days": ["Monday", "Wednesday", "Friday"],
+    "start_time": "11:00",
+    "end_time": "11:50"
+  }
+]

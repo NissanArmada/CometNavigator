@@ -1,0 +1,95 @@
+[
+  {
+    "_id": "ObjectId('64f8d4e5f60000000000001')",
+    "date": "2026-03-02",
+    "sessions": [
+      {
+        "event_name": "CS 3345 Midterm Prep",
+        "start": "15:00",
+        "end": "17:00",
+        "participants_number": 4,
+        "topic": "Graphs and Trees"
+      },
+      {
+        "event_name": "PHYS 2325 Homework Help",
+        "start": "18:00",
+        "end": "19:30",
+        "participants_number": 2,
+        "topic": "Newton's Laws and Kinematics"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8d4e5f60000000000002')",
+    "date": "2026-03-03",
+    "sessions": [
+      {
+        "event_name": "MATH 2418 Study Group",
+        "start": "13:00",
+        "end": "15:00",
+        "participants_number": 3,
+        "topic": "Eigenvalues and Eigenvectors"
+      },
+      {
+        "event_name": "CS 4349 Algorithm Review",
+        "start": "16:00",
+        "end": "17:30",
+        "participants_number": 5,
+        "topic": "Dynamic Programming"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8d4e5f60000000000003')",
+    "date": "2026-03-04",
+    "sessions": [
+      {
+        "event_name": "EE 3301 Signals Review",
+        "start": "14:00",
+        "end": "15:30",
+        "participants_number": 3,
+        "topic": "Fourier Transform"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8d4e5f60000000000004')",
+    "date": "2026-03-05",
+    "sessions": [
+      {
+        "event_name": "CS 3345 Final Exam Prep",
+        "start": "10:00",
+        "end": "12:30",
+        "participants_number": 6,
+        "topic": "Sorting Algorithms and Complexity"
+      },
+      {
+        "event_name": "PHYS 2325 Lab Report Help",
+        "start": "17:00",
+        "end": "18:00",
+        "participants_number": 2,
+        "topic": "Projectile Motion Lab"
+      },
+      {
+        "event_name": "MATH 2418 Practice Problems",
+        "start": "19:00",
+        "end": "20:30",
+        "participants_number": 4,
+        "topic": "Matrix Decomposition"
+      }
+    ]
+  },
+  {
+    "_id": "ObjectId('64f8d4e5f60000000000005')",
+    "date": "2026-03-06",
+    "sessions": [
+      {
+        "event_name": "CS 4349 Homework Session",
+        "start": "16:30",
+        "end": "18:00",
+        "participants_number": 3,
+        "topic": "Greedy Algorithms"
+      }
+    ]
+  }
+]
