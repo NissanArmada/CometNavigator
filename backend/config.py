@@ -17,6 +17,10 @@ class Settings:
     # ai service config
     GEMINI_API_KEY: str = config("GEMINI_API_KEY", default=None)
     GEMINI_MODEL: str = config("GEMINI_MODEL", default="gemini-2.5-flash-lite")
+    
+    # Nebula key
+    NEBULA_API_URL: str = config("NEBULA_API_URL", default="")
+    NEBULA_API_KEY: str = config("NEBULA_API_KEY", default="")
 
     # email config - might not need this at all
     SMTP_SERVER: str = config("SMTP_SERVER", default="")
