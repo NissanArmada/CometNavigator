@@ -1,3 +1,5 @@
+import Link from "next/dist/client/link";
+
 const imgHero =
   "/assets/78afdcfbed23cb40b4acd0433e67899202b1899d.png";
 const imgBetaIcon =
@@ -39,9 +41,11 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-4 pt-4">
+            <Link href="/login">
             <button className="bg-[#af5a3c] text-white font-bold text-base px-8 py-[17px] rounded-3xl shadow-[0_20px_25px_-5px_rgba(175,90,60,0.2),0_8px_10px_-6px_rgba(175,90,60,0.2)] hover:bg-[#9a4f35] transition-colors cursor-pointer">
               Get Started for Free
             </button>
+            </Link>
             <button className="flex items-center gap-2 bg-white/5 border border-white/10 font-bold text-[#f1f5f9] text-base px-8 py-[17px] rounded-3xl hover:bg-white/10 transition-colors cursor-pointer">
               <img src={imgPlayIcon} alt="" className="w-5 h-5 block" />
               View Demo
