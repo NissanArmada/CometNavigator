@@ -24,9 +24,7 @@ router = APIRouter()
 async def register_user(
     user: UserCreate, db: Annotated[AsyncDatabase, Depends(get_db)]
 ):
-    if await db["Users"].find_one(
-        {"$or": [{"netid": user.netid}, {"email": user.email}]}
-    ):
+    if await db["Users"].find_one({"netid": user.netid}):
         logger.warning("user tried to create an account with an existing email in DB")
         raise Conflict("Account already exists")
 

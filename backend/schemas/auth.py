@@ -6,21 +6,22 @@ from exceptions import BadRequest
 
 
 class UserCreate(BaseModel):
-    email: str
     password: str
-    netid: Optional[str] = ""
+    netid: str
+    email: Optional[str] = ""
 
     @model_validator(mode="after")
-    def validate_utd_email(self) -> "UserCreate":
-        pattern = r"^[a-zA-Z]{3}\d{6}@utdallas\.edu$"
-        if not re.match(pattern, self.email):
+    @classmethod
+    def validate_utd_email(cls, values: "UserCreate") -> "UserCreate":
+        pattern = r"^[a-zA-Z]{3}\d{6}$"
+        if not re.match(pattern, values.netid):
             raise BadRequest(
-                "Email must be a valid @utdallas.edu address (e.g., abc123456@utdallas.edu)"
+                "NetID must be in the format of 3 letters followed by 6 digits (e.g., abc123456)"
             )
+        
+        values.email = f"{values.netid}@utdallas.edu"
 
-        self.netid = self.email.split("@")[0]
-
-        return self
+        return values
 
 
 class UserResponse(BaseModel):

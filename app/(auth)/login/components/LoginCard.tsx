@@ -1,4 +1,9 @@
 import Link from "next/link";
+import React, { useState } from "react";
+import { auth } from "@/utils/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { navigate } from "next/dist/client/components/segment-cache/navigation";
+import router from "next/router";
 
 const imgLogo = "/assets/66fbdce0468157c30a2bf4eea33f97c3f7199d0b.svg";
 const imgUserIcon = "/assets/49f093c9fabb4443ade4861b5c5cb2e057e5e291.svg";
@@ -6,6 +11,46 @@ const imgLockIcon = "/assets/b16637946c9f7951ab4749fe525ac290dc78ee02.svg";
 const imgArrowIcon = "/assets/9076dd6e4c1895d69009143f7dd6c131e31d8c88.svg";
 
 export default function LoginCard() {
+  const [netid, setNetID] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
+  async function handle_submit() {
+    const res = await fetch("127.0.0.1:8000/scraper/courses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        netid,
+        password,
+      }),
+    });
+
+    if (res.ok) {
+      const course_data = await res.json();
+      sessionStorage.setItem("course_data", JSON.stringify(course_data));
+
+      const res1 = await fetch("127.0.0.1:8000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          netid,
+          password,
+        }),
+      });
+
+      if (res1.status === 409) {
+        await signInWithEmailAndPassword(auth, `${netid}@utdallas.edu`, password!);
+        router.push("/dashboard");
+      } else {
+        await signInWithEmailAndPassword(auth, `${netid}@utdallas.edu`, password!);
+        router.push("/onboard-survey");
+      }
+    }
+  }
+
   return (
     <div className="flex flex-col gap-8 w-full max-w-[440px] mx-auto">
       {/* Branding */}
@@ -37,6 +82,7 @@ export default function LoginCard() {
               <input
                 type="text"
                 placeholder="Enter your NetID"
+                onChange={(e) => setNetID(e.target.value)}
                 className="w-full bg-[rgba(26,24,23,0.5)] border border-[#334155] rounded-2xl pl-12 pr-4 py-[17px] text-base text-[#f1f5f9] placeholder-[#475569] outline-none focus:border-[#af5a3c] transition-colors"
               />
             </div>
@@ -53,6 +99,7 @@ export default function LoginCard() {
               <input
                 type="password"
                 placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-[rgba(26,24,23,0.5)] border border-[#334155] rounded-2xl pl-12 pr-4 py-[17px] text-base text-[#f1f5f9] placeholder-[#475569] outline-none focus:border-[#af5a3c] transition-colors"
               />
             </div>

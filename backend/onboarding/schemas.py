@@ -3,12 +3,14 @@ from typing import List
 
 
 class UserSurveyResponse(BaseModel):
-    """User responses from onboarding survey"""
     uid: str = Field(..., description="User's Firebase UID")
     major: str = Field(..., description="Student's major")
     belief: str = Field(..., description="Student's religious/belief preference")
     nationality: str = Field(..., description="Student's nationality/ethnicity")
     hobbies: List[str] = Field(..., description="List of user's hobbies/interests")
+    clubs: str = Field(..., description="Student's past clubs")
+    work_preference: str = Field(..., description="Student's day/night work preference")
+    goals: str = Field(..., description="Student's academic/personal goals")
 
 
 class ClubRecommendation(BaseModel):
