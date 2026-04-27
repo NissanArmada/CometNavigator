@@ -1,3 +1,5 @@
+<img src="https://c.tenor.com/7Wr359XtEtEAAAAd/tenor.gif" width=200 height=200>
+
 # ☄️ Comet Navigator
 
 **Description**
