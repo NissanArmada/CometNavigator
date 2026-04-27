@@ -1,4 +1,6 @@
-![alt text](https://c.tenor.com/7Wr359XtEtEAAAAd/tenor.gif "Low Cortisol")
+<p align="center">
+   <img src="https://c.tenor.com/7Wr359XtEtEAAAAd/tenor.gif" alt="Low Cortisol">
+</p>
 
 # ☄️ Comet Navigator
 
